@@ -43,7 +43,6 @@ body {
   background: linear-gradient(135deg,rgba(13,5,25,0.80) 0%,rgba(108,63,197,0.50) 40%,rgba(255,90,31,0.32) 70%,rgba(13,5,25,0.88) 100%);
   z-index: 1;
 }
-/* Halftone dot overlay */
 .halftone {
   position: fixed; inset: 0; z-index: 2; pointer-events: none;
   background-image: radial-gradient(circle, rgba(255,140,66,0.18) 1.2px, transparent 1.2px);
@@ -81,8 +80,6 @@ body {
   color: rgba(255,232,214,0.65);
   text-transform: uppercase; margin-bottom: 6px;
 }
-
-/* Action-lines logo wrap */
 .logo-action-wrap {
   display: inline-block; position: relative;
   margin-bottom: 12px; padding: 0 10px;
@@ -120,7 +117,6 @@ body {
   height: 54px; width: auto; display: block;
   filter: drop-shadow(0 0 12px rgba(255,140,66,0.8));
 }
-
 .title-comic {
   font-family: 'Bangers', Impact, sans-serif;
   font-size: clamp(2.8rem, 9vw, 4.4rem);
@@ -270,7 +266,6 @@ canvas {
   display: block;
   animation: powPop 1.4s cubic-bezier(0.36,0.07,0.19,0.97) forwards;
 }
-/* Spiky bubble teeth via clip-path skipped — using CSS star shape instead */
 .pow-bubble::before {
   content: '';
   position: absolute; inset: -14px;
@@ -349,10 +344,8 @@ canvas {
   <div class="header">
     <div class="infinix-badge">Infinix</div>
 
-    <!-- Action-lines logo panel -->
     <div class="logo-action-wrap">
       <svg class="action-lines" viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg">
-        <!-- radiating lines from center -->
         <line x1="130" y1="60" x2="0"   y2="0"/>
         <line x1="130" y1="60" x2="30"  y2="0"/>
         <line x1="130" y1="60" x2="65"  y2="0"/>
@@ -419,23 +412,45 @@ canvas {
 </div>
 
 <script>
-const SETS = [
-  {name:"Set 1",  url:"https://docs.google.com/forms/d/e/1FAIpQLScVDslhDDeEL7tONrqcYJ84uFtS6FMVjCU1ScBNS_3lzfRHDA/viewform?usp=header"},
-  {name:"Set 2",  url:"https://docs.google.com/forms/d/e/1FAIpQLSdYYfyQTGGsW4WwbhaSdjHZajU1CUTcMNA7oXGA352RskvTpA/viewform?usp=header"},
-  {name:"Set 3",  url:"https://docs.google.com/forms/d/e/1FAIpQLScgqvVtJxqChg2GHzc8-og_B6dec1Gk853Z0qItp_ZOZP6WDg/viewform?usp=header"},
-  {name:"Set 4",  url:"https://docs.google.com/forms/d/e/1FAIpQLSeuaTJOP49uRj2rjD3-WEJzQBxF40GqwP6nLsEBCw3XpZKnAg/viewform?usp=header"},
-  {name:"Set 5",  url:"https://docs.google.com/forms/d/e/1FAIpQLScPvXNQp-YERnWVBKdApQ2ugE0LSrNE9rZicC680DNj_7hjqw/viewform?usp=header"},
-  {name:"Set 6",  url:"https://forms.gle/9oBSpuCd4Nriw9Q98"},
-  {name:"Set 7",  url:"https://forms.gle/hvZnJCzj11zJAdqN6"},
-  {name:"Set 8",  url:"https://forms.gle/C9yR4AkckJ3NRAqD7"},
-  {name:"Set 9",  url:"https://forms.gle/YsBhPbS11t7VEFzW7"},
-  {name:"Set 10", url:"https://forms.gle/xXL3v6DhTQtKw67E9"},
-  {name:"Set 11", url:"https://forms.gle/NLNNVkHuEDwfSepv5"},
-  {name:"Set 12", url:"https://forms.gle/LbKMec16UaX91zVu5"},
-  {name:"Set 13", url:"https://forms.gle/sPK2sTuLuJ3pzpPk6"},
-  {name:"Set 14", url:"https://forms.gle/Gf9mUqjzMeiBdtrE7"},
-  {name:"Set 15", url:"https://forms.gle/TgQPDUB3o2UuTgGLA"}
+
+// ============================================================
+// 🔗 ONLY EDIT THIS — paste your links here, one per line
+// Add or remove as many as you want — wheel auto-adjusts
+// ============================================================
+const LINKS = [
+  "https://docs.google.com/forms/d/e/1FAIpQLScVDslhDDeEL7tONrqcYJ84uFtS6FMVjCU1ScBNS_3lzfRHDA/viewform?usp=header",
+  "https://docs.google.com/forms/d/e/1FAIpQLSdYYfyQTGGsW4WwbhaSdjHZajU1CUTcMNA7oXGA352RskvTpA/viewform?usp=header",
+  "https://docs.google.com/forms/d/e/1FAIpQLScgqvVtJxqChg2GHzc8-og_B6dec1Gk853Z0qItp_ZOZP6WDg/viewform?usp=header",
+  "https://docs.google.com/forms/d/e/1FAIpQLSeuaTJOP49uRj2rjD3-WEJzQBxF40GqwP6nLsEBCw3XpZKnAg/viewform?usp=header",
+  "https://docs.google.com/forms/d/e/1FAIpQLScPvXNQp-YERnWVBKdApQ2ugE0LSrNE9rZicC680DNj_7hjqw/viewform?usp=header",
+  "https://forms.gle/9oBSpuCd4Nriw9Q98",
+  "https://forms.gle/hvZnJCzj11zJAdqN6",
+  "https://forms.gle/C9yR4AkckJ3NRAqD7",
+  "https://forms.gle/YsBhPbS11t7VEFzW7",
+  "https://forms.gle/xXL3v6DhTQtKw67E9",
+  "https://forms.gle/NLNNVkHuEDwfSepv5",
+  "https://forms.gle/LbKMec16UaX91zVu5",
+  "https://forms.gle/sPK2sTuLuJ3pzpPk6",
+  "https://forms.gle/Gf9mUqjzMeiBdtrE7",
+  "https://forms.gle/TgQPDUB3o2UuTgGLA"
+  // ← add more links here anytime
 ];
+// ============================================================
+
+
+// Fisher-Yates shuffle
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Shuffle links on every page load, then map to Set names
+const shuffledLinks = shuffle(LINKS);
+const SETS = shuffledLinks.map((url, i) => ({ name: `Set ${i + 1}`, url }));
 
 const canvas = document.getElementById('wheelCanvas');
 const ctx = canvas.getContext('2d');
@@ -443,11 +458,10 @@ const TAU = Math.PI * 2;
 const SEG = SETS.length;
 const SEG_ANG = TAU / SEG;
 
-// High-contrast alternating: orange / white / purple / white / ...
-const COLORS     = ['#FF5A1F','#F5F0FF','#6C3FC5','#FFF4E8','#FF8C42','#EEE8FF','#9B5DE5','#FFF8F0','#C7490A','#D4C0FF','#FF6B35','#E8E0FF','#7B4FD0','#FFE4CC','#8B45E0'];
+const COLORS   = ['#FF5A1F','#F5F0FF','#6C3FC5','#FFF4E8','#FF8C42','#EEE8FF','#9B5DE5','#FFF8F0','#C7490A','#D4C0FF','#FF6B35','#E8E0FF','#7B4FD0','#FFE4CC','#8B45E0'];
 const TEXT_DARK  = '#1A0A2E';
 const TEXT_LIGHT = '#FFF8F0';
-const TEXT_CLR   = [TEXT_LIGHT, TEXT_DARK, TEXT_LIGHT, TEXT_DARK, TEXT_DARK, TEXT_DARK, TEXT_LIGHT, TEXT_DARK, TEXT_LIGHT, TEXT_DARK, TEXT_LIGHT, TEXT_DARK, TEXT_LIGHT, TEXT_DARK, TEXT_LIGHT];
+const TEXT_CLR   = [TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_DARK,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT];
 
 let rot = Math.random() * TAU;
 let spinning = false, spinCount = 0, history = [];
@@ -494,7 +508,7 @@ function drawWheel(r) {
   for(let i=0;i<SEG;i++) {
     const s=i*SEG_ANG+r, e=s+SEG_ANG;
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,rad,s,e); ctx.closePath();
-    ctx.fillStyle=COLORS[i]; ctx.fill();
+    ctx.fillStyle=COLORS[i % COLORS.length]; ctx.fill();
 
     // Sheen
     const gs=ctx.createRadialGradient(cx,cy,0,cx,cy,rad);
@@ -511,33 +525,31 @@ function drawWheel(r) {
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,rad,s,e); ctx.closePath();
     ctx.stroke(); ctx.restore();
 
-    // Bold label with outline for contrast
+    // Label
     ctx.save();
     ctx.translate(cx,cy); ctx.rotate(s+SEG_ANG/2);
     const fs = Math.min(18, rad/4.8);
     ctx.font = `900 ${fs}px 'Nunito','Segoe UI'`;
     ctx.textAlign='center'; ctx.textBaseline='middle';
-    // Outline
-    ctx.strokeStyle = TEXT_CLR[i] === TEXT_LIGHT ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.7)';
+    const tc = TEXT_CLR[i % TEXT_CLR.length];
+    ctx.strokeStyle = tc === TEXT_LIGHT ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.7)';
     ctx.lineWidth=4; ctx.lineJoin='round';
     ctx.strokeText(SETS[i].name, rad*0.62, 0);
-    // Fill
-    ctx.fillStyle=TEXT_CLR[i];
+    ctx.fillStyle=tc;
     ctx.shadowColor='rgba(0,0,0,0.5)'; ctx.shadowBlur=4;
     ctx.fillText(SETS[i].name, rad*0.62, 0);
     ctx.restore();
   }
 
   // Tick marks around rim
-  const tickCount = SEG * 4; // 4 ticks per segment
+  const tickCount = SEG * 4;
   for(let i=0;i<tickCount;i++) {
     const angle = (i / tickCount) * TAU + r;
     const isMajor = i % 4 === 0;
     const outerR = rad + 2;
     const innerR = rad - (isMajor ? 14 : 7);
     ctx.save();
-    ctx.translate(cx,cy);
-    ctx.rotate(angle);
+    ctx.translate(cx,cy); ctx.rotate(angle);
     ctx.beginPath();
     ctx.moveTo(innerR, 0); ctx.lineTo(outerR, 0);
     ctx.strokeStyle = isMajor ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.45)';
@@ -616,7 +628,7 @@ function showPow() {
   const el = document.getElementById('powBubble');
   el.textContent = WORDS[Math.floor(Math.random()*WORDS.length)];
   el.classList.remove('show');
-  void el.offsetWidth; // reflow
+  void el.offsetWidth;
   el.classList.add('show');
   setTimeout(()=>el.classList.remove('show'), 1500);
 }
