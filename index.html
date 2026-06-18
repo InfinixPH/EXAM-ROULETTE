@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HOT 70 | Exam Roulette</title>
+<title>REFRESHER | Exam Roulette</title>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -113,9 +113,18 @@ body {
   animation: sheen 3.5s ease-in-out infinite;
 }
 @keyframes sheen { 0%{left:-100%} 50%{left:130%} 100%{left:130%} }
-.hot70-logo {
-  height: 54px; width: auto; display: block;
+.logo-text {
+  font-family: 'Bangers', Impact, sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  background: linear-gradient(160deg, #FFE8D6 0%, #FF8C42 30%, #FF5A1F 55%, #C77DFF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   filter: drop-shadow(0 0 12px rgba(255,140,66,0.8));
+  line-height: 1.2;
+  padding: 0 4px;
 }
 .title-comic {
   font-family: 'Bangers', Impact, sans-serif;
@@ -372,7 +381,7 @@ canvas {
         <line x1="130" y1="60" x2="260" y2="90"/>
       </svg>
       <div class="logo-panel">
-        <img src="HOT70 LOGO.png" class="hot70-logo" alt="HOT 70">
+        <div class="logo-text">REFRESHER</div>
       </div>
     </div>
 
@@ -402,7 +411,7 @@ canvas {
 
     <div class="meta-row">
       <span id="spinCount">📊 Spins: 0</span>
-      <span>HOT 70 · Exam Roulette</span>
+      <span>REFRESHER · Exam Roulette</span>
     </div>
     <div class="history-section">
       <div class="history-title">Recently Selected</div>
@@ -590,7 +599,7 @@ function drawWheel(r) {
   ctx.fillStyle='#FFF8F0';
   ctx.font='bold 13px "Nunito"'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=5;
-  ctx.fillText('HOT',cx,cy-7); ctx.fillText('70',cx,cy+8);
+  ctx.fillText('RFR',cx,cy-7); ctx.fillText('70',cx,cy+8);
   ctx.restore();
 }
 
