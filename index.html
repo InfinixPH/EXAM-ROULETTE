@@ -52,19 +52,16 @@ body {
 
 /* ── MASCOT ── */
 .mascot-right {
-  position: fixed; right: -18px; bottom: -14px;
-  width: 360px; z-index: 3;
-  mix-blend-mode: screen; opacity: 0.92;
+  position: fixed; right: 0; bottom: 0;
+  width: 380px; max-width: 34vw; z-index: 3;
+  mix-blend-mode: screen; opacity: 0.95;
   pointer-events: none;
-  filter: drop-shadow(0 0 35px rgba(140,210,17,0.45)) saturate(1.08) contrast(1.05);
+  -webkit-mask-image: radial-gradient(ellipse 95% 90% at 100% 100%, black 45%, transparent 88%);
+  mask-image: radial-gradient(ellipse 95% 90% at 100% 100%, black 45%, transparent 88%);
+  filter: drop-shadow(0 0 40px rgba(140,210,17,0.5)) saturate(1.1) contrast(1.05);
 }
-.mascot-left {
-  position: fixed; left: -90px; top: 60px;
-  width: 230px; z-index: 3;
-  mix-blend-mode: screen; opacity: 0.4;
-  transform: scaleX(-1) rotate(4deg);
-  pointer-events: none;
-  filter: drop-shadow(0 0 26px rgba(47,232,168,0.4)) saturate(1.05);
+@media (max-width: 900px) {
+  .mascot-right { display: none; }
 }
 
 /* ── MAIN CONTAINER ── */
@@ -332,8 +329,6 @@ canvas {
 }
 
 @media (max-width:500px) {
-  .mascot-left { width:150px; left:-60px; opacity:0.28; }
-  .mascot-right { width:230px; right:-14px; bottom:-10px; opacity:0.8; }
   .wheel-ring { width:268px; height:268px; }
   .title-comic { font-size:2.5rem; }
   .spin-btn { font-size:1.25rem; padding:13px; }
@@ -346,7 +341,6 @@ canvas {
 <div class="bg-comic"></div>
 <div class="bg-overlay"></div>
 <div class="halftone"></div>
-<img src="MASCOT.jpg" class="mascot-left" alt="">
 <img src="MASCOT.jpg" class="mascot-right" alt="">
 <div class="confetti-container" id="confettiContainer"></div>
 
