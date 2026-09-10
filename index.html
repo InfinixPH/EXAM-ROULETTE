@@ -8,16 +8,16 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 :root {
-  --orange: #FF5A1F;
-  --orange2: #FF8C42;
-  --orange3: #FFB347;
-  --purple: #6C3FC5;
-  --purple2: #9B5DE5;
-  --purple3: #C77DFF;
-  --dark: #1A0A2E;
-  --darker: #0D0519;
-  --white: #FFF8F0;
-  --cream: #FFE8D6;
+  --orange: #8CD211;
+  --orange2: #6ED23A;
+  --orange3: #B7F24C;
+  --purple: #0FA968;
+  --purple2: #2FE8A8;
+  --purple3: #7CFFD1;
+  --dark: #0A1F12;
+  --darker: #04100A;
+  --white: #F3FFF0;
+  --cream: #E6FFE0;
 }
 body {
   min-height: 100vh;
@@ -34,36 +34,37 @@ body {
 /* ── BACKGROUND ── */
 .bg-comic {
   position: fixed; inset: 0;
-  background-image: url('BG (1).png');
-  background-size: cover; background-position: center;
+  background-image: url('BG_2.png'), radial-gradient(circle at 50% 50%, #0A2015 0%, #04100A 100%);
+  background-size: cover, cover; background-position: center, center;
   z-index: 0;
 }
 .bg-overlay {
   position: fixed; inset: 0;
-  background: linear-gradient(135deg,rgba(13,5,25,0.80) 0%,rgba(108,63,197,0.50) 40%,rgba(255,90,31,0.32) 70%,rgba(13,5,25,0.88) 100%);
+  background: linear-gradient(135deg,rgba(4,16,10,0.80) 0%,rgba(15,169,104,0.50) 40%,rgba(140,210,17,0.32) 70%,rgba(4,16,10,0.88) 100%);
   z-index: 1;
 }
 .halftone {
   position: fixed; inset: 0; z-index: 2; pointer-events: none;
-  background-image: radial-gradient(circle, rgba(255,140,66,0.18) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(circle, rgba(110,210,58,0.18) 1.2px, transparent 1.2px);
   background-size: 18px 18px;
   mix-blend-mode: screen;
 }
 
-/* ── PHONE RENDERS ── */
-.phone-left {
-  position: fixed; left: -40px; bottom: -20px;
-  width: 420px; opacity: 0.62; z-index: 3;
-  transform: rotate(-14deg) scaleX(-1);
+/* ── MASCOT ── */
+.mascot-right {
+  position: fixed; right: -18px; bottom: -14px;
+  width: 360px; z-index: 3;
+  mix-blend-mode: screen; opacity: 0.92;
   pointer-events: none;
-  filter: drop-shadow(0 0 30px rgba(255,90,31,0.55)) drop-shadow(-8px 0 24px rgba(255,90,31,0.3));
+  filter: drop-shadow(0 0 35px rgba(140,210,17,0.45)) saturate(1.08) contrast(1.05);
 }
-.phone-right {
-  position: fixed; right: -50px; top: 20px;
-  width: 460px; opacity: 0.55; z-index: 3;
-  transform: rotate(11deg);
+.mascot-left {
+  position: fixed; left: -90px; top: 60px;
+  width: 230px; z-index: 3;
+  mix-blend-mode: screen; opacity: 0.4;
+  transform: scaleX(-1) rotate(4deg);
   pointer-events: none;
-  filter: drop-shadow(0 0 30px rgba(155,93,229,0.65)) drop-shadow(8px 0 24px rgba(108,63,197,0.4));
+  filter: drop-shadow(0 0 26px rgba(47,232,168,0.4)) saturate(1.05);
 }
 
 /* ── MAIN CONTAINER ── */
@@ -75,10 +76,10 @@ body {
 /* ── HEADER ── */
 .header { text-align: center; margin-bottom: 16px; }
 .infinix-badge {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.78rem; letter-spacing: 5px;
-  color: rgba(255,232,214,0.65);
-  text-transform: uppercase; margin-bottom: 6px;
+  height: 16px; margin: 0 auto 8px;
+  filter: invert(1) brightness(1.15);
+  opacity: 0.82;
+  display: block;
 }
 .logo-action-wrap {
   display: inline-block; position: relative;
@@ -89,21 +90,21 @@ body {
   z-index: 0; pointer-events: none;
 }
 .action-lines line {
-  stroke: rgba(255,140,66,0.45); stroke-width: 2;
+  stroke: rgba(110,210,58,0.45); stroke-width: 2;
   stroke-linecap: round;
 }
 .logo-panel {
   position: relative; z-index: 1;
   display: inline-block;
-  background: rgba(13,5,25,0.82);
+  background: rgba(4,16,10,0.82);
   border: 3px solid var(--orange);
   border-radius: 14px; padding: 10px 32px 8px;
   backdrop-filter: blur(14px);
   box-shadow:
-    0 0 0 2px rgba(199,125,255,0.3),
-    0 0 35px rgba(255,90,31,0.40),
-    inset 0 0 20px rgba(255,140,66,0.08),
-    5px 5px 0 rgba(108,63,197,0.65);
+    0 0 0 2px rgba(124,255,209,0.3),
+    0 0 35px rgba(140,210,17,0.40),
+    inset 0 0 20px rgba(110,210,58,0.08),
+    5px 5px 0 rgba(15,169,104,0.65);
   overflow: hidden;
 }
 .logo-panel::before {
@@ -118,11 +119,11 @@ body {
   font-size: 2.2rem;
   letter-spacing: 6px;
   text-transform: uppercase;
-  background: linear-gradient(160deg, #FFE8D6 0%, #FF8C42 30%, #FF5A1F 55%, #C77DFF 100%);
+  background: linear-gradient(160deg, #E6FFE0 0%, #6ED23A 30%, #8CD211 55%, #7CFFD1 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 12px rgba(255,140,66,0.8));
+  filter: drop-shadow(0 0 12px rgba(110,210,58,0.8));
   line-height: 1.2;
   padding: 0 4px;
 }
@@ -130,9 +131,9 @@ body {
   font-family: 'Bangers', Impact, sans-serif;
   font-size: clamp(2.8rem, 9vw, 4.4rem);
   line-height: 0.9; letter-spacing: 4px; text-transform: uppercase;
-  background: linear-gradient(160deg, #FFE8D6 0%, #FF8C42 30%, #FF5A1F 55%, #C77DFF 100%);
+  background: linear-gradient(160deg, #E6FFE0 0%, #6ED23A 30%, #8CD211 55%, #7CFFD1 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(3px 3px 0px rgba(108,63,197,0.85)) drop-shadow(0 0 22px rgba(255,90,31,0.35));
+  filter: drop-shadow(3px 3px 0px rgba(15,169,104,0.85)) drop-shadow(0 0 22px rgba(140,210,17,0.35));
   margin-bottom: 6px;
 }
 .subtitle-tag {
@@ -141,20 +142,20 @@ body {
   color: var(--white); font-family: 'Bebas Neue', sans-serif;
   font-size: 0.75rem; letter-spacing: 3px; padding: 4px 16px;
   border-radius: 999px; text-transform: uppercase;
-  box-shadow: 0 0 16px rgba(255,90,31,0.4), 3px 3px 0 rgba(108,63,197,0.5);
+  box-shadow: 0 0 16px rgba(140,210,17,0.4), 3px 3px 0 rgba(15,169,104,0.5);
 }
 
 /* ── COMIC CARD ── */
 .comic-card {
-  background: rgba(13,5,25,0.80);
+  background: rgba(4,16,10,0.80);
   backdrop-filter: blur(22px);
   border-radius: 26px;
-  border: 3px solid rgba(255,90,31,0.60);
+  border: 3px solid rgba(140,210,17,0.60);
   box-shadow:
-    0 0 0 1px rgba(199,125,255,0.20),
-    0 0 50px rgba(255,90,31,0.20),
-    inset 0 0 30px rgba(108,63,197,0.08),
-    7px 7px 0 rgba(108,63,197,0.50);
+    0 0 0 1px rgba(124,255,209,0.20),
+    0 0 50px rgba(140,210,17,0.20),
+    inset 0 0 30px rgba(15,169,104,0.08),
+    7px 7px 0 rgba(15,169,104,0.50);
   padding: 22px; margin-bottom: 16px;
   position: relative; overflow: hidden;
 }
@@ -171,10 +172,10 @@ body {
 .wheel-ring {
   position: relative; width: 320px; height: 320px; border-radius: 50%;
   box-shadow:
-    0 0 0 5px rgba(255,90,31,0.75),
-    0 0 0 10px rgba(199,125,255,0.28),
-    0 0 60px rgba(255,90,31,0.38),
-    0 0 110px rgba(108,63,197,0.22);
+    0 0 0 5px rgba(140,210,17,0.75),
+    0 0 0 10px rgba(124,255,209,0.28),
+    0 0 60px rgba(140,210,17,0.38),
+    0 0 110px rgba(15,169,104,0.22);
 }
 canvas {
   position: absolute; top:0; left:0;
@@ -190,13 +191,13 @@ canvas {
   width:0; height:0;
   border-left:15px solid transparent;
   border-right:15px solid transparent;
-  border-top:32px solid #FF5A1F;
-  filter: drop-shadow(0 0 10px rgba(255,90,31,0.95));
+  border-top:32px solid #8CD211;
+  filter: drop-shadow(0 0 10px rgba(140,210,17,0.95));
 }
 .pointer-dot {
   width:11px; height:11px; background:var(--orange2);
   border-radius:50%; margin-top:-5px;
-  box-shadow: 0 0 14px rgba(255,140,66,1);
+  box-shadow: 0 0 14px rgba(110,210,58,1);
 }
 
 /* ── SPIN BUTTON ── */
@@ -206,12 +207,12 @@ canvas {
   font-family: 'Bangers', Impact, sans-serif;
   font-size: 1.55rem; letter-spacing: 3px; text-transform: uppercase;
   cursor: pointer; border-radius: 16px;
-  border: 3px solid rgba(255,200,100,0.6);
-  background: linear-gradient(135deg, #FF5A1F 0%, #FF8C42 45%, #9B5DE5 100%);
+  border: 3px solid rgba(183,242,76,0.6);
+  background: linear-gradient(135deg, #8CD211 0%, #6ED23A 45%, #2FE8A8 100%);
   color: var(--white); text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
   box-shadow:
-    0 0 24px rgba(255,90,31,0.45),
-    4px 4px 0 rgba(108,63,197,0.65),
+    0 0 24px rgba(140,210,17,0.45),
+    4px 4px 0 rgba(15,169,104,0.65),
     inset 0 1px 0 rgba(255,255,255,0.28);
   transition: all 0.18s ease; position: relative; overflow: hidden;
 }
@@ -222,16 +223,16 @@ canvas {
   transform:skewX(-20deg); transition:0.5s;
 }
 .spin-btn:hover::after { left:130%; }
-.spin-btn:hover { transform:translate(-2px,-3px) scale(1.02); box-shadow:0 0 40px rgba(255,90,31,0.65),7px 7px 0 rgba(108,63,197,0.7); }
-.spin-btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 rgba(108,63,197,0.5); }
+.spin-btn:hover { transform:translate(-2px,-3px) scale(1.02); box-shadow:0 0 40px rgba(140,210,17,0.65),7px 7px 0 rgba(15,169,104,0.7); }
+.spin-btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 rgba(15,169,104,0.5); }
 .spin-btn:disabled { opacity:0.45; cursor:not-allowed; transform:none; }
 
 /* ── RESULT CARD ── */
 .result-card {
-  background: linear-gradient(145deg,rgba(255,90,31,0.10),rgba(108,63,197,0.12));
-  border: 2px solid rgba(255,140,66,0.38); border-radius: 20px;
+  background: linear-gradient(145deg,rgba(140,210,17,0.10),rgba(15,169,104,0.12));
+  border: 2px solid rgba(110,210,58,0.38); border-radius: 20px;
   padding: 16px; text-align: center;
-  box-shadow: inset 0 0 22px rgba(255,90,31,0.06), 3px 3px 0 rgba(108,63,197,0.35);
+  box-shadow: inset 0 0 22px rgba(140,210,17,0.06), 3px 3px 0 rgba(15,169,104,0.35);
   transition: transform 0.2s ease; position: relative; overflow: visible;
 }
 .result-label {
@@ -240,9 +241,9 @@ canvas {
 }
 .result-text {
   font-family: 'Bangers', Impact, sans-serif; font-size: 2.6rem; letter-spacing: 3px;
-  background: linear-gradient(135deg, #FFE8D6, #FF8C42 50%, #C77DFF);
+  background: linear-gradient(135deg, #E6FFE0, #6ED23A 50%, #7CFFD1);
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(2px 2px 0 rgba(108,63,197,0.55)); margin: 4px 0;
+  filter: drop-shadow(2px 2px 0 rgba(15,169,104,0.55)); margin: 4px 0;
 }
 .open-btn {
   display: inline-flex; align-items: center; gap: 8px;
@@ -250,10 +251,10 @@ canvas {
   color: var(--white); font-family: 'Bebas Neue', sans-serif;
   font-size: 1.05rem; letter-spacing: 2px; padding: 10px 26px;
   border-radius: 12px; text-decoration: none; margin-top: 10px;
-  box-shadow: 3px 3px 0 rgba(108,63,197,0.65), 0 0 22px rgba(255,90,31,0.38);
+  box-shadow: 3px 3px 0 rgba(15,169,104,0.65), 0 0 22px rgba(140,210,17,0.38);
   transition: 0.2s; border: 2px solid rgba(255,255,255,0.22);
 }
-.open-btn:hover { transform:translate(-2px,-2px); box-shadow:6px 6px 0 rgba(108,63,197,0.8),0 0 32px rgba(255,90,31,0.55); }
+.open-btn:hover { transform:translate(-2px,-2px); box-shadow:6px 6px 0 rgba(15,169,104,0.8),0 0 32px rgba(140,210,17,0.55); }
 
 /* ── POW BUBBLE ── */
 .pow-bubble {
@@ -263,12 +264,12 @@ canvas {
   z-index: 100; pointer-events: none;
   font-family: 'Bangers', Impact, sans-serif;
   font-size: 2.4rem; letter-spacing: 3px;
-  color: #1A0A2E;
-  background: radial-gradient(ellipse at 50% 55%, #FFD700 60%, #FF8C42 100%);
+  color: #0A1F12;
+  background: radial-gradient(ellipse at 50% 55%, #FFD700 60%, #6ED23A 100%);
   padding: 12px 28px 14px;
   border-radius: 50%;
-  border: 4px solid #FF5A1F;
-  box-shadow: 4px 4px 0 rgba(108,63,197,0.8), 0 0 30px rgba(255,215,0,0.6);
+  border: 4px solid #8CD211;
+  box-shadow: 4px 4px 0 rgba(15,169,104,0.8), 0 0 30px rgba(255,215,0,0.6);
   white-space: nowrap;
 }
 .pow-bubble.show {
@@ -315,24 +316,24 @@ canvas {
 .meta-row {
   display: flex; justify-content: space-between; align-items: center;
   padding: 10px 4px 4px; font-size: 0.68rem;
-  color: rgba(255,232,214,0.45); letter-spacing: 1px; text-transform: uppercase;
+  color: rgba(230,255,224,0.45); letter-spacing: 1px; text-transform: uppercase;
   font-family: 'Bebas Neue', sans-serif;
 }
-.history-section { border-top: 1px solid rgba(255,90,31,0.18); padding-top: 12px; }
+.history-section { border-top: 1px solid rgba(140,210,17,0.18); padding-top: 12px; }
 .history-title {
   font-family: 'Bebas Neue', sans-serif; font-size: 0.65rem; letter-spacing: 3px;
-  color: rgba(199,125,255,0.55); text-align: center; margin-bottom: 8px; text-transform: uppercase;
+  color: rgba(124,255,209,0.55); text-align: center; margin-bottom: 8px; text-transform: uppercase;
 }
 .history-pills { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
 .history-pill {
-  background: rgba(255,90,31,0.13); border:1px solid rgba(255,90,31,0.32);
+  background: rgba(140,210,17,0.13); border:1px solid rgba(140,210,17,0.32);
   border-radius:999px; padding:4px 14px; font-size:0.68rem; color:var(--cream);
-  box-shadow: 2px 2px 0 rgba(108,63,197,0.28); letter-spacing:0.5px;
+  box-shadow: 2px 2px 0 rgba(15,169,104,0.28); letter-spacing:0.5px;
 }
 
 @media (max-width:500px) {
-  .phone-left { width:280px; left:-30px; opacity:0.45; }
-  .phone-right { width:300px; right:-30px; opacity:0.38; }
+  .mascot-left { width:150px; left:-60px; opacity:0.28; }
+  .mascot-right { width:230px; right:-14px; bottom:-10px; opacity:0.8; }
   .wheel-ring { width:268px; height:268px; }
   .title-comic { font-size:2.5rem; }
   .spin-btn { font-size:1.25rem; padding:13px; }
@@ -345,13 +346,13 @@ canvas {
 <div class="bg-comic"></div>
 <div class="bg-overlay"></div>
 <div class="halftone"></div>
-<img src="PHONE RENDER.png" class="phone-left" alt="">
-<img src="PHONE RENDER.png" class="phone-right" alt="">
+<img src="MASCOT.jpg" class="mascot-left" alt="">
+<img src="MASCOT.jpg" class="mascot-right" alt="">
 <div class="confetti-container" id="confettiContainer"></div>
 
 <div class="container">
   <div class="header">
-    <div class="infinix-badge">Infinix</div>
+    <img src="infinix.png" class="infinix-badge" alt="Infinix">
 
     <div class="logo-action-wrap">
       <svg class="action-lines" viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg">
@@ -459,9 +460,9 @@ const TAU = Math.PI * 2;
 const SEG = SETS.length;
 const SEG_ANG = TAU / SEG;
 
-const COLORS   = ['#FF5A1F','#F5F0FF','#6C3FC5','#FFF4E8','#FF8C42','#EEE8FF','#9B5DE5','#FFF8F0','#C7490A','#D4C0FF','#FF6B35','#E8E0FF','#7B4FD0','#FFE4CC','#8B45E0'];
-const TEXT_DARK  = '#1A0A2E';
-const TEXT_LIGHT = '#FFF8F0';
+const COLORS   = ['#0B7A3E','#F3FFF0','#128254','#E3FFE0','#D6FFC2','#F0FFE8','#0A6B34','#F7FFF3','#0FA968','#C9FFC0','#0C9E52','#DFFFE0','#146B45','#EFFFE8','#12B37A'];
+const TEXT_DARK  = '#0A1F12';
+const TEXT_LIGHT = '#F3FFF0';
 const TEXT_CLR   = [TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_DARK,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT];
 
 let rot = Math.random() * TAU;
@@ -501,8 +502,8 @@ function drawWheel(r) {
   // Outer glow disc
   ctx.save();
   ctx.beginPath(); ctx.arc(cx,cy,rad+14,0,TAU);
-  ctx.fillStyle='rgba(255,90,31,0.10)';
-  ctx.shadowColor='rgba(255,90,31,0.6)'; ctx.shadowBlur=28;
+  ctx.fillStyle='rgba(140,210,17,0.10)';
+  ctx.shadowColor='rgba(140,210,17,0.6)'; ctx.shadowBlur=28;
   ctx.fill(); ctx.restore();
 
   // Segments
@@ -555,7 +556,7 @@ function drawWheel(r) {
     ctx.moveTo(innerR, 0); ctx.lineTo(outerR, 0);
     ctx.strokeStyle = isMajor ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.45)';
     ctx.lineWidth = isMajor ? 3 : 1.5;
-    ctx.shadowColor = 'rgba(255,200,100,0.8)'; ctx.shadowBlur = isMajor ? 8 : 3;
+    ctx.shadowColor = 'rgba(183,242,76,0.8)'; ctx.shadowBlur = isMajor ? 8 : 3;
     ctx.stroke(); ctx.restore();
   }
 
@@ -576,14 +577,14 @@ function drawWheel(r) {
   // Center hub
   ctx.save();
   ctx.beginPath(); ctx.arc(cx,cy,44,0,TAU);
-  ctx.fillStyle='#0D0519';
-  ctx.shadowColor='rgba(255,90,31,0.9)'; ctx.shadowBlur=20;
+  ctx.fillStyle='#04100A';
+  ctx.shadowColor='rgba(140,210,17,0.9)'; ctx.shadowBlur=20;
   ctx.fill();
   ctx.beginPath(); ctx.arc(cx,cy,32,0,TAU);
   const hg = ctx.createRadialGradient(cx,cy,0,cx,cy,32);
-  hg.addColorStop(0,'#FF8C42'); hg.addColorStop(1,'#FF5A1F');
+  hg.addColorStop(0,'#6ED23A'); hg.addColorStop(1,'#8CD211');
   ctx.fillStyle=hg; ctx.fill();
-  ctx.fillStyle='#FFF8F0';
+  ctx.fillStyle='#F3FFF0';
   ctx.font='bold 13px "Nunito"'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=5;
   ctx.fillText('RFR',cx,cy-7); ctx.fillText('70',cx,cy+8);
@@ -601,7 +602,7 @@ function rotForIdx(idx) {
 
 // ── CONFETTI ──
 const CONFETTI_SHAPES = ['★','●','■','▲','♦'];
-const CONFETTI_COLORS = ['#FF5A1F','#FFD700','#C77DFF','#FF8C42','#FFF8F0','#9B5DE5','#FFB347'];
+const CONFETTI_COLORS = ['#8CD211','#FFD700','#7CFFD1','#6ED23A','#F3FFF0','#2FE8A8','#B7F24C'];
 function launchConfetti() {
   const container = document.getElementById('confettiContainer');
   container.innerHTML = '';
