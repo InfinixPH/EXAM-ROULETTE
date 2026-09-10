@@ -52,16 +52,13 @@ body {
 
 /* ── MASCOT ── */
 .mascot-right {
-  position: fixed; right: 0; bottom: 0;
-  width: 380px; max-width: 34vw; z-index: 3;
-  mix-blend-mode: screen; opacity: 0.95;
+  position: fixed; right: -6px; bottom: -10px;
+  width: 420px; max-width: 42vw; z-index: 4;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse 95% 90% at 100% 100%, black 45%, transparent 88%);
-  mask-image: radial-gradient(ellipse 95% 90% at 100% 100%, black 45%, transparent 88%);
-  filter: drop-shadow(0 0 40px rgba(140,210,17,0.5)) saturate(1.1) contrast(1.05);
+  filter: drop-shadow(0 10px 40px rgba(0,0,0,0.55)) drop-shadow(0 0 45px rgba(140,210,17,0.55));
 }
-@media (max-width: 900px) {
-  .mascot-right { display: none; }
+@media (max-width: 760px) {
+  .mascot-right { width: 240px; max-width: 52vw; right: -4px; bottom: -6px; }
 }
 
 /* ── MAIN CONTAINER ── */
@@ -341,7 +338,7 @@ canvas {
 <div class="bg-comic"></div>
 <div class="bg-overlay"></div>
 <div class="halftone"></div>
-<img src="MASCOT.jpg" class="mascot-right" alt="">
+<img src="MASCOT.png" class="mascot-right" alt="">
 <div class="confetti-container" id="confettiContainer"></div>
 
 <div class="container">
