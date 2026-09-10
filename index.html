@@ -64,11 +64,11 @@ body {
 /* ── MAIN CONTAINER ── */
 .container {
   position: relative; z-index: 10;
-  width: 100%; max-width: 660px; margin: 0 auto;
+  width: 100%; max-width: 760px; margin: 0 auto;
 }
 
 /* ── HEADER ── */
-.header { text-align: center; margin-bottom: 10px; }
+.header { text-align: center; margin-bottom: 6px; }
 .infinix-chip {
   position: fixed; top: 18px; left: 18px; z-index: 20;
   display: flex; align-items: center; justify-content: center;
@@ -164,7 +164,7 @@ body {
   position: relative;
 }
 .wheel-ring {
-  position: relative; width: 250px; height: 250px; border-radius: 50%;
+  position: relative; width: clamp(220px, 54vw, 340px); height: clamp(220px, 54vw, 340px); border-radius: 50%;
   box-shadow:
     0 0 0 5px rgba(140,210,17,0.75),
     0 0 0 10px rgba(124,255,209,0.28),
@@ -197,9 +197,9 @@ canvas {
 /* ── SPIN BUTTON ── */
 .spin-btn {
   display: block; width: min(380px,90%);
-  margin: 0 auto 8px; padding: 11px 20px;
+  margin: 0 auto 6px; padding: 9px 20px;
   font-family: 'Bangers', Impact, sans-serif;
-  font-size: 1.3rem; letter-spacing: 3px; text-transform: uppercase;
+  font-size: 1.15rem; letter-spacing: 3px; text-transform: uppercase;
   cursor: pointer; border-radius: 16px;
   border: 3px solid rgba(183,242,76,0.6);
   background: linear-gradient(135deg, #8CD211 0%, #6ED23A 45%, #2FE8A8 100%);
@@ -224,27 +224,27 @@ canvas {
 /* ── RESULT CARD ── */
 .result-card {
   background: linear-gradient(145deg,rgba(140,210,17,0.10),rgba(15,169,104,0.12));
-  border: 2px solid rgba(110,210,58,0.38); border-radius: 18px;
-  padding: 10px; text-align: center;
+  border: 2px solid rgba(110,210,58,0.38); border-radius: 16px;
+  padding: 7px; text-align: center;
   box-shadow: inset 0 0 22px rgba(140,210,17,0.06), 3px 3px 0 rgba(15,169,104,0.35);
   transition: transform 0.2s ease; position: relative; overflow: visible;
 }
 .result-label {
-  font-family: 'Bebas Neue', sans-serif; font-size: 0.62rem;
-  letter-spacing: 3px; color: var(--orange2); margin-bottom: 4px; text-transform: uppercase;
+  font-family: 'Bebas Neue', sans-serif; font-size: 0.58rem;
+  letter-spacing: 3px; color: var(--orange2); margin-bottom: 2px; text-transform: uppercase;
 }
 .result-text {
-  font-family: 'Bangers', Impact, sans-serif; font-size: 1.9rem; letter-spacing: 3px;
+  font-family: 'Bangers', Impact, sans-serif; font-size: 1.5rem; letter-spacing: 3px;
   background: linear-gradient(135deg, #E6FFE0, #6ED23A 50%, #7CFFD1);
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(2px 2px 0 rgba(15,169,104,0.55)); margin: 2px 0;
+  filter: drop-shadow(2px 2px 0 rgba(15,169,104,0.55)); margin: 1px 0;
 }
 .open-btn {
   display: inline-flex; align-items: center; gap: 8px;
   background: linear-gradient(135deg, var(--orange), var(--purple2));
   color: var(--white); font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.95rem; letter-spacing: 2px; padding: 8px 22px;
-  border-radius: 12px; text-decoration: none; margin-top: 6px;
+  font-size: 0.85rem; letter-spacing: 2px; padding: 6px 18px;
+  border-radius: 12px; text-decoration: none; margin-top: 4px;
   box-shadow: 3px 3px 0 rgba(15,169,104,0.65), 0 0 22px rgba(140,210,17,0.38);
   transition: 0.2s; border: 2px solid rgba(255,255,255,0.22);
 }
@@ -309,27 +309,26 @@ canvas {
 /* ── META & HISTORY ── */
 .meta-row {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 6px 4px 2px; font-size: 0.62rem;
+  padding: 4px 4px 2px; font-size: 0.58rem;
   color: rgba(230,255,224,0.45); letter-spacing: 1px; text-transform: uppercase;
   font-family: 'Bebas Neue', sans-serif;
 }
-.history-section { border-top: 1px solid rgba(140,210,17,0.18); padding-top: 8px; }
+.history-section { border-top: 1px solid rgba(140,210,17,0.18); padding-top: 6px; }
 .history-title {
-  font-family: 'Bebas Neue', sans-serif; font-size: 0.6rem; letter-spacing: 3px;
-  color: rgba(124,255,209,0.55); text-align: center; margin-bottom: 6px; text-transform: uppercase;
+  font-family: 'Bebas Neue', sans-serif; font-size: 0.58rem; letter-spacing: 3px;
+  color: rgba(124,255,209,0.55); text-align: center; margin-bottom: 4px; text-transform: uppercase;
 }
-.history-pills { display:flex; flex-wrap:wrap; gap:5px; justify-content:center; }
+.history-pills { display:flex; flex-wrap:wrap; gap:4px; justify-content:center; }
 .history-pill {
   background: rgba(140,210,17,0.13); border:1px solid rgba(140,210,17,0.32);
-  border-radius:999px; padding:3px 12px; font-size:0.64rem; color:var(--cream);
+  border-radius:999px; padding:2px 10px; font-size:0.6rem; color:var(--cream);
   box-shadow: 2px 2px 0 rgba(15,169,104,0.28); letter-spacing:0.5px;
 }
 
 @media (max-width:500px) {
-  .wheel-ring { width:210px; height:210px; }
   .title-comic { font-size:2rem; }
-  .spin-btn { font-size:1.1rem; padding:10px; }
-  .result-text { font-size:1.6rem; }
+  .spin-btn { font-size:1rem; padding:8px; }
+  .result-text { font-size:1.3rem; }
 }
 </style>
 </head>
