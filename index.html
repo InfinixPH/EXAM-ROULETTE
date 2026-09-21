@@ -194,6 +194,21 @@ canvas {
   box-shadow: 0 0 14px rgba(110,210,58,1);
 }
 
+/* ── SPIN NOTE ── */
+.spin-note {
+  text-align: center;
+  font-family: 'Nunito', 'Segoe UI', sans-serif;
+  font-weight: 900; font-size: 0.85rem;
+  color: var(--purple3);
+  margin: 0 auto 8px;
+  padding: 5px 14px;
+  width: fit-content; max-width: 100%;
+  border: 1.5px dashed rgba(124,255,209,0.55);
+  border-radius: 999px;
+  background: rgba(15,169,104,0.14);
+}
+.spin-note.used { color: var(--orange3); border-color: rgba(183,242,76,0.6); background: rgba(140,210,17,0.14); }
+
 /* ── SPIN BUTTON ── */
 .spin-btn {
   display: block; width: min(380px,90%);
@@ -220,6 +235,7 @@ canvas {
 .spin-btn:hover { transform:translate(-2px,-3px) scale(1.02); box-shadow:0 0 40px rgba(140,210,17,0.65),7px 7px 0 rgba(15,169,104,0.7); }
 .spin-btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 rgba(15,169,104,0.5); }
 .spin-btn:disabled { opacity:0.45; cursor:not-allowed; transform:none; }
+.spin-btn:disabled:hover::after { left:-80%; }
 
 /* ── RESULT CARD ── */
 .result-card {
@@ -313,17 +329,6 @@ canvas {
   color: rgba(230,255,224,0.45); letter-spacing: 1px; text-transform: uppercase;
   font-family: 'Bebas Neue', sans-serif;
 }
-.history-section { border-top: 1px solid rgba(140,210,17,0.18); padding-top: 6px; }
-.history-title {
-  font-family: 'Bebas Neue', sans-serif; font-size: 0.58rem; letter-spacing: 3px;
-  color: rgba(124,255,209,0.55); text-align: center; margin-bottom: 4px; text-transform: uppercase;
-}
-.history-pills { display:flex; flex-wrap:wrap; gap:4px; justify-content:center; }
-.history-pill {
-  background: rgba(140,210,17,0.13); border:1px solid rgba(140,210,17,0.32);
-  border-radius:999px; padding:2px 10px; font-size:0.6rem; color:var(--cream);
-  box-shadow: 2px 2px 0 rgba(15,169,104,0.28); letter-spacing:0.5px;
-}
 
 @media (max-width:500px) {
   .title-comic { font-size:2rem; }
@@ -365,6 +370,7 @@ canvas {
       </div>
     </div>
 
+    <div class="spin-note" id="spinNote">You only have 1 spin.</div>
     <button class="spin-btn" id="spinBtn">🔥 SPIN THE WHEEL!</button>
 
     <div class="result-card" id="resultCard">
@@ -375,12 +381,7 @@ canvas {
     </div>
 
     <div class="meta-row">
-      <span id="spinCount">📊 Spins: 0</span>
       <span>ECHO · Exam Roulette</span>
-    </div>
-    <div class="history-section">
-      <div class="history-title">Recently Selected</div>
-      <div class="history-pills" id="historyPills"></div>
     </div>
   </div>
 </div>
@@ -390,6 +391,8 @@ canvas {
 // ============================================================
 // 🔗 ONLY EDIT THIS — paste your links here, one per line
 // Add or remove as many as you want — wheel auto-adjusts
+// NOTE: keep the ORDER of this list stable once the exam is live.
+// Set numbers follow the order (Set 1 = first link, etc.)
 // ============================================================
 const LINKS = [
 "https://docs.google.com/forms/d/e/1FAIpQLSc6RoEleJvfPPrQSks5ao9rFvrpTT6XjbR3kKJOVJRjc4Z-gQ/viewform?usp=header",
@@ -401,22 +404,14 @@ const LINKS = [
 "https://docs.google.com/forms/d/e/1FAIpQLSd79WvNTYAN2NYe6wFYNNGok85yVmosuPgFA2R-ge3KSuFEVA/viewform?usp=header"
   // ← add more links here anytime
 ];
+
+// Change this value to reset everyone's lock (e.g. for a new exam batch)
+const LOCK_KEY = 'echo_exam_lock_v1';
 // ============================================================
 
 
-// Fisher-Yates shuffle
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-// Shuffle links on every page load, then map to Set names
-const shuffledLinks = shuffle(LINKS);
-const SETS = shuffledLinks.map((url, i) => ({ name: `Set ${i + 1}`, url }));
+// Fixed order (no shuffle) so "Set N" always means the same link
+const SETS = LINKS.map((url, i) => ({ name: `Set ${i + 1}`, url }));
 
 const canvas = document.getElementById('wheelCanvas');
 const ctx = canvas.getContext('2d');
@@ -430,8 +425,10 @@ const TEXT_LIGHT = '#F3FFF0';
 const TEXT_CLR   = [TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_DARK,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT];
 
 let rot = Math.random() * TAU;
-let spinning = false, spinCount = 0, history = [];
+let spinning = false;
 let audioCtx = null, lastTick = 0;
+
+const spinBtn = document.getElementById('spinBtn');
 
 function initAudio() {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -599,6 +596,42 @@ function showPow() {
   setTimeout(()=>el.classList.remove('show'), 1500);
 }
 
+// ── LOCK (one spin per browser) ──
+function readLock() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(LOCK_KEY));
+    if (!saved || !saved.url) return null;
+    const idx = SETS.findIndex(s => s.url === saved.url);
+    return idx >= 0 ? idx : null;
+  } catch (e) { return null; }
+}
+function saveLock(idx) {
+  try {
+    localStorage.setItem(LOCK_KEY, JSON.stringify({ url: SETS[idx].url, t: Date.now() }));
+  } catch (e) {}
+}
+function lockButton() {
+  spinBtn.disabled = true;
+  spinBtn.textContent = '🔒 ALREADY SPUN';
+  const note = document.getElementById('spinNote');
+  note.textContent = 'You already used your spin. Your result stays the same.';
+  note.classList.add('used');
+}
+function renderResult(set) {
+  document.getElementById('resultText').textContent = set.name;
+  document.getElementById('linkWrap').innerHTML =
+    `<a href="${set.url}" target="_blank" rel="noopener" class="open-btn">OPEN ${set.name} →</a>`;
+}
+function restoreLock() {
+  const idx = readLock();
+  if (idx === null) return false;
+  rot = rotForIdx(idx);
+  drawWheel(rot);
+  renderResult(SETS[idx]);
+  lockButton();
+  return true;
+}
+
 let startRot, targetRot, spinStart, spinDur;
 function animate(now) {
   const elapsed=now-spinStart, t=Math.min(1,elapsed/spinDur);
@@ -612,34 +645,34 @@ function animate(now) {
   if(t<1) { requestAnimationFrame(animate); return; }
   rot=targetRot%TAU; drawWheel(rot);
   const idx=getIdx(rot); showResult(SETS[idx]); playLand();
-  spinning=false; document.getElementById('spinBtn').disabled=false;
+  spinning=false;
+  lockButton(); // stays locked after the spin
 }
 
 function showResult(set) {
-  document.getElementById('resultText').textContent=set.name;
-  document.getElementById('linkWrap').innerHTML=
-    `<a href="${set.url}" target="_blank" class="open-btn">OPEN ${set.name} →</a>`;
-  history.unshift(set.name); if(history.length>5) history.pop();
-  document.getElementById('historyPills').innerHTML=
-    history.map(n=>`<div class="history-pill">${n}</div>`).join('');
-  spinCount++; document.getElementById('spinCount').textContent=`📊 Spins: ${spinCount}`;
+  renderResult(set);
   const card=document.getElementById('resultCard');
   card.style.transform='scale(1.04)'; setTimeout(()=>card.style.transform='scale(1)',200);
   launchConfetti();
   showPow();
 }
 
-document.getElementById('spinBtn').onclick=()=>{
+spinBtn.onclick=()=>{
   if(spinning) return;
+  if(readLock() !== null) { lockButton(); return; } // already spun
+
   initAudio(); spinning=true; lastTick=0;
-  document.getElementById('spinBtn').disabled=true;
+  spinBtn.disabled=true;
+
   const idx=Math.floor(Math.random()*SEG);
+  saveLock(idx); // saved at click time, so refreshing mid-spin can't re-roll
+
   startRot=rot; targetRot=rotForIdx(idx)+(8+Math.random()*7)*TAU;
   spinStart=performance.now(); spinDur=3400+Math.random()*900;
   requestAnimationFrame(animate);
 };
 
-drawWheel(rot);
+if (!restoreLock()) drawWheel(rot);
 </script>
 </body>
 </html>
