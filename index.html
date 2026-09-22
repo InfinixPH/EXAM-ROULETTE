@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ECHO | Exam Roulette</title>
+<title>GT NX | Exam Roulette</title>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 :root {
-  --orange: #8CD211;
-  --orange2: #6ED23A;
-  --orange3: #B7F24C;
-  --purple: #0FA968;
-  --purple2: #2FE8A8;
-  --purple3: #7CFFD1;
-  --dark: #0A1F12;
-  --darker: #04100A;
-  --white: #F3FFF0;
-  --cream: #E6FFE0;
+  --orange: #FF2E9A;
+  --orange2: #29D6FF;
+  --orange3: #FFD23D;
+  --purple: #5B1FB5;
+  --purple2: #00A8FF;
+  --purple3: #9CF0FF;
+  --dark: #070B1E;
+  --darker: #03050F;
+  --white: #EAF4FF;
+  --cream: #D8ECFF;
 }
 body {
   min-height: 100vh;
@@ -34,18 +34,18 @@ body {
 /* ── BACKGROUND ── */
 .bg-comic {
   position: fixed; inset: 0;
-  background-image: url('BG_2.png'), radial-gradient(circle at 50% 50%, #0A2015 0%, #04100A 100%);
+  background-image: url('BG_2.jpg'), radial-gradient(circle at 50% 50%, #0A1030 0%, #03050F 100%);
   background-size: cover, cover; background-position: center, center;
   z-index: 0;
 }
 .bg-overlay {
   position: fixed; inset: 0;
-  background: linear-gradient(135deg,rgba(4,16,10,0.80) 0%,rgba(15,169,104,0.50) 40%,rgba(140,210,17,0.32) 70%,rgba(4,16,10,0.88) 100%);
+  background: linear-gradient(135deg,rgba(3,5,18,0.88) 0%,rgba(20,10,50,0.72) 40%,rgba(91,31,181,0.55) 70%,rgba(3,5,18,0.92) 100%);
   z-index: 1;
 }
 .halftone {
   position: fixed; inset: 0; z-index: 2; pointer-events: none;
-  background-image: radial-gradient(circle, rgba(110,210,58,0.18) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(circle, rgba(41,214,255,0.18) 1.2px, transparent 1.2px);
   background-size: 18px 18px;
   mix-blend-mode: screen;
 }
@@ -55,7 +55,7 @@ body {
   position: fixed; right: -6px; bottom: -10px;
   width: 420px; max-width: 42vw; z-index: 4;
   pointer-events: none;
-  filter: drop-shadow(0 10px 40px rgba(0,0,0,0.55)) drop-shadow(0 0 45px rgba(140,210,17,0.55));
+  filter: drop-shadow(0 10px 40px rgba(0,0,0,0.55)) drop-shadow(0 0 45px rgba(255,46,154,0.55));
 }
 @media (max-width: 760px) {
   .mascot-right { width: 240px; max-width: 52vw; right: -4px; bottom: -6px; }
@@ -73,11 +73,11 @@ body {
   position: fixed; top: 18px; left: 18px; z-index: 20;
   display: flex; align-items: center; justify-content: center;
   width: fit-content;
-  background: rgba(4,16,10,0.65);
-  border: 1.5px solid rgba(140,210,17,0.55);
+  background: rgba(3,5,18,0.65);
+  border: 1.5px solid rgba(255,46,154,0.55);
   border-radius: 999px;
   padding: 6px 18px;
-  box-shadow: 0 0 20px rgba(140,210,17,0.28), inset 0 0 12px rgba(110,210,58,0.08);
+  box-shadow: 0 0 20px rgba(255,46,154,0.28), inset 0 0 12px rgba(41,214,255,0.08);
 }
 .infinix-badge {
   height: 22px; display: block;
@@ -90,15 +90,15 @@ body {
 .logo-panel {
   position: relative; z-index: 1;
   display: inline-block;
-  background: rgba(4,16,10,0.82);
+  background: rgba(3,5,18,0.82);
   border: 3px solid var(--orange);
   border-radius: 14px; padding: 8px 28px 6px;
   backdrop-filter: blur(14px);
   box-shadow:
-    0 0 0 2px rgba(124,255,209,0.3),
-    0 0 35px rgba(140,210,17,0.40),
-    inset 0 0 20px rgba(110,210,58,0.08),
-    5px 5px 0 rgba(15,169,104,0.65);
+    0 0 0 2px rgba(156,240,255,0.3),
+    0 0 35px rgba(255,46,154,0.40),
+    inset 0 0 20px rgba(41,214,255,0.08),
+    5px 5px 0 rgba(91,31,181,0.65);
   overflow: hidden;
 }
 .logo-panel::before {
@@ -113,22 +113,20 @@ body {
   font-size: 1.9rem;
   letter-spacing: 6px;
   text-transform: uppercase;
-  background: linear-gradient(160deg, #E6FFE0 0%, #6ED23A 30%, #8CD211 55%, #7CFFD1 100%);
+  background: linear-gradient(160deg, #D8ECFF 0%, #29D6FF 30%, #FF2E9A 55%, #9CF0FF 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 12px rgba(110,210,58,0.8));
+  filter: drop-shadow(0 0 12px rgba(41,214,255,0.8));
   line-height: 1.2;
   padding: 0 4px;
 }
-.title-comic {
-  font-family: 'Bangers', Impact, sans-serif;
-  font-size: clamp(2.2rem, 6.5vw, 3.2rem);
-  line-height: 0.9; letter-spacing: 3px; text-transform: uppercase;
-  background: linear-gradient(160deg, #E6FFE0 0%, #6ED23A 30%, #8CD211 55%, #7CFFD1 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(3px 3px 0px rgba(15,169,104,0.85)) drop-shadow(0 0 22px rgba(140,210,17,0.35));
-  margin-bottom: 4px;
+.brand-logo {
+  display: block;
+  width: clamp(200px, 42vw, 320px);
+  height: auto;
+  margin: 4px auto 10px;
+  filter: drop-shadow(0 0 18px rgba(41,214,255,0.55)) drop-shadow(0 0 34px rgba(255,46,154,0.30));
 }
 .subtitle-tag {
   display: inline-block;
@@ -136,20 +134,20 @@ body {
   color: var(--white); font-family: 'Bebas Neue', sans-serif;
   font-size: 0.7rem; letter-spacing: 3px; padding: 3px 14px;
   border-radius: 999px; text-transform: uppercase;
-  box-shadow: 0 0 16px rgba(140,210,17,0.4), 3px 3px 0 rgba(15,169,104,0.5);
+  box-shadow: 0 0 16px rgba(255,46,154,0.4), 3px 3px 0 rgba(91,31,181,0.5);
 }
 
 /* ── COMIC CARD ── */
 .comic-card {
-  background: rgba(4,16,10,0.80);
+  background: rgba(3,5,18,0.80);
   backdrop-filter: blur(22px);
   border-radius: 26px;
-  border: 3px solid rgba(140,210,17,0.60);
+  border: 3px solid rgba(255,46,154,0.60);
   box-shadow:
-    0 0 0 1px rgba(124,255,209,0.20),
-    0 0 50px rgba(140,210,17,0.20),
-    inset 0 0 30px rgba(15,169,104,0.08),
-    7px 7px 0 rgba(15,169,104,0.50);
+    0 0 0 1px rgba(156,240,255,0.20),
+    0 0 50px rgba(255,46,154,0.20),
+    inset 0 0 30px rgba(91,31,181,0.08),
+    7px 7px 0 rgba(91,31,181,0.50);
   padding: 16px; margin-bottom: 10px;
   position: relative; overflow: hidden;
 }
@@ -166,10 +164,10 @@ body {
 .wheel-ring {
   position: relative; width: clamp(220px, 54vw, 340px); height: clamp(220px, 54vw, 340px); border-radius: 50%;
   box-shadow:
-    0 0 0 5px rgba(140,210,17,0.75),
-    0 0 0 10px rgba(124,255,209,0.28),
-    0 0 60px rgba(140,210,17,0.38),
-    0 0 110px rgba(15,169,104,0.22);
+    0 0 0 5px rgba(255,46,154,0.75),
+    0 0 0 10px rgba(156,240,255,0.28),
+    0 0 60px rgba(255,46,154,0.38),
+    0 0 110px rgba(91,31,181,0.22);
 }
 canvas {
   position: absolute; top:0; left:0;
@@ -185,13 +183,13 @@ canvas {
   width:0; height:0;
   border-left:15px solid transparent;
   border-right:15px solid transparent;
-  border-top:32px solid #8CD211;
-  filter: drop-shadow(0 0 10px rgba(140,210,17,0.95));
+  border-top:32px solid #FF2E9A;
+  filter: drop-shadow(0 0 10px rgba(255,46,154,0.95));
 }
 .pointer-dot {
   width:11px; height:11px; background:var(--orange2);
   border-radius:50%; margin-top:-5px;
-  box-shadow: 0 0 14px rgba(110,210,58,1);
+  box-shadow: 0 0 14px rgba(41,214,255,1);
 }
 
 /* ── SPIN NOTE ── */
@@ -203,11 +201,11 @@ canvas {
   margin: 0 auto 8px;
   padding: 5px 14px;
   width: fit-content; max-width: 100%;
-  border: 1.5px dashed rgba(124,255,209,0.55);
+  border: 1.5px dashed rgba(156,240,255,0.55);
   border-radius: 999px;
-  background: rgba(15,169,104,0.14);
+  background: rgba(91,31,181,0.14);
 }
-.spin-note.used { color: var(--orange3); border-color: rgba(183,242,76,0.6); background: rgba(140,210,17,0.14); }
+.spin-note.used { color: var(--orange3); border-color: rgba(255,210,61,0.6); background: rgba(255,46,154,0.14); }
 
 /* ── SPIN BUTTON ── */
 .spin-btn {
@@ -216,12 +214,12 @@ canvas {
   font-family: 'Bangers', Impact, sans-serif;
   font-size: 1.15rem; letter-spacing: 3px; text-transform: uppercase;
   cursor: pointer; border-radius: 16px;
-  border: 3px solid rgba(183,242,76,0.6);
-  background: linear-gradient(135deg, #8CD211 0%, #6ED23A 45%, #2FE8A8 100%);
+  border: 3px solid rgba(255,210,61,0.6);
+  background: linear-gradient(135deg, #FF2E9A 0%, #29D6FF 45%, #00A8FF 100%);
   color: var(--white); text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
   box-shadow:
-    0 0 24px rgba(140,210,17,0.45),
-    4px 4px 0 rgba(15,169,104,0.65),
+    0 0 24px rgba(255,46,154,0.45),
+    4px 4px 0 rgba(91,31,181,0.65),
     inset 0 1px 0 rgba(255,255,255,0.28);
   transition: all 0.18s ease; position: relative; overflow: hidden;
 }
@@ -232,17 +230,17 @@ canvas {
   transform:skewX(-20deg); transition:0.5s;
 }
 .spin-btn:hover::after { left:130%; }
-.spin-btn:hover { transform:translate(-2px,-3px) scale(1.02); box-shadow:0 0 40px rgba(140,210,17,0.65),7px 7px 0 rgba(15,169,104,0.7); }
-.spin-btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 rgba(15,169,104,0.5); }
+.spin-btn:hover { transform:translate(-2px,-3px) scale(1.02); box-shadow:0 0 40px rgba(255,46,154,0.65),7px 7px 0 rgba(91,31,181,0.7); }
+.spin-btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 rgba(91,31,181,0.5); }
 .spin-btn:disabled { opacity:0.45; cursor:not-allowed; transform:none; }
 .spin-btn:disabled:hover::after { left:-80%; }
 
 /* ── RESULT CARD ── */
 .result-card {
-  background: linear-gradient(145deg,rgba(140,210,17,0.10),rgba(15,169,104,0.12));
-  border: 2px solid rgba(110,210,58,0.38); border-radius: 16px;
+  background: linear-gradient(145deg,rgba(255,46,154,0.10),rgba(91,31,181,0.12));
+  border: 2px solid rgba(41,214,255,0.38); border-radius: 16px;
   padding: 7px; text-align: center;
-  box-shadow: inset 0 0 22px rgba(140,210,17,0.06), 3px 3px 0 rgba(15,169,104,0.35);
+  box-shadow: inset 0 0 22px rgba(255,46,154,0.06), 3px 3px 0 rgba(91,31,181,0.35);
   transition: transform 0.2s ease; position: relative; overflow: visible;
 }
 .result-label {
@@ -251,9 +249,9 @@ canvas {
 }
 .result-text {
   font-family: 'Bangers', Impact, sans-serif; font-size: 1.5rem; letter-spacing: 3px;
-  background: linear-gradient(135deg, #E6FFE0, #6ED23A 50%, #7CFFD1);
+  background: linear-gradient(135deg, #D8ECFF, #29D6FF 50%, #9CF0FF);
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(2px 2px 0 rgba(15,169,104,0.55)); margin: 1px 0;
+  filter: drop-shadow(2px 2px 0 rgba(91,31,181,0.55)); margin: 1px 0;
 }
 .open-btn {
   display: inline-flex; align-items: center; gap: 8px;
@@ -261,10 +259,10 @@ canvas {
   color: var(--white); font-family: 'Bebas Neue', sans-serif;
   font-size: 0.85rem; letter-spacing: 2px; padding: 6px 18px;
   border-radius: 12px; text-decoration: none; margin-top: 4px;
-  box-shadow: 3px 3px 0 rgba(15,169,104,0.65), 0 0 22px rgba(140,210,17,0.38);
+  box-shadow: 3px 3px 0 rgba(91,31,181,0.65), 0 0 22px rgba(255,46,154,0.38);
   transition: 0.2s; border: 2px solid rgba(255,255,255,0.22);
 }
-.open-btn:hover { transform:translate(-2px,-2px); box-shadow:6px 6px 0 rgba(15,169,104,0.8),0 0 32px rgba(140,210,17,0.55); }
+.open-btn:hover { transform:translate(-2px,-2px); box-shadow:6px 6px 0 rgba(91,31,181,0.8),0 0 32px rgba(255,46,154,0.55); }
 
 /* ── POW BUBBLE ── */
 .pow-bubble {
@@ -274,12 +272,12 @@ canvas {
   z-index: 100; pointer-events: none;
   font-family: 'Bangers', Impact, sans-serif;
   font-size: 2.4rem; letter-spacing: 3px;
-  color: #0A1F12;
-  background: radial-gradient(ellipse at 50% 55%, #FFD700 60%, #6ED23A 100%);
+  color: #070B1E;
+  background: radial-gradient(ellipse at 50% 55%, #FFD700 60%, #29D6FF 100%);
   padding: 12px 28px 14px;
   border-radius: 50%;
-  border: 4px solid #8CD211;
-  box-shadow: 4px 4px 0 rgba(15,169,104,0.8), 0 0 30px rgba(255,215,0,0.6);
+  border: 4px solid #FF2E9A;
+  box-shadow: 4px 4px 0 rgba(91,31,181,0.8), 0 0 30px rgba(255,215,0,0.6);
   white-space: nowrap;
 }
 .pow-bubble.show {
@@ -326,12 +324,12 @@ canvas {
 .meta-row {
   display: flex; justify-content: space-between; align-items: center;
   padding: 4px 4px 2px; font-size: 0.58rem;
-  color: rgba(230,255,224,0.45); letter-spacing: 1px; text-transform: uppercase;
+  color: rgba(216,236,255,0.45); letter-spacing: 1px; text-transform: uppercase;
   font-family: 'Bebas Neue', sans-serif;
 }
 
 @media (max-width:500px) {
-  .title-comic { font-size:2rem; }
+  .title-comic { font-size:1.35rem; }
   .spin-btn { font-size:1rem; padding:8px; }
   .result-text { font-size:1.3rem; }
 }
@@ -349,14 +347,8 @@ canvas {
   <div class="header">
     <div class="infinix-chip"><img src="infinix.png" class="infinix-badge" alt="Infinix"></div>
 
-    <div class="logo-action-wrap">
-      <div class="logo-panel">
-        <div class="logo-text">ECHO</div>
-      </div>
-    </div>
-
-    <div class="title-comic">Exam Roulette</div>
-    <div class="subtitle-tag">🎯 Randomizer System</div>
+    <img src="GT-logo.png" class="brand-logo" alt="Infinix GT">
+    <div class="subtitle-tag">🎯 Exam Roulette</div>
   </div>
 
   <div class="comic-card">
@@ -381,7 +373,7 @@ canvas {
     </div>
 
     <div class="meta-row">
-      <span>ECHO · Exam Roulette</span>
+      <span>GT NX · Exam Roulette</span>
     </div>
   </div>
 </div>
@@ -395,26 +387,18 @@ canvas {
 // Set numbers follow the order (Set 1 = first link, etc.)
 // ============================================================
 const LINKS = [
-"https://forms.gle/usAhwdfTxPMb2bto6",
-"https://forms.gle/i7urrRgfZP4og9yj8",
-"https://forms.gle/MsP55QPwYNWY3zgNA",
-"https://forms.gle/Y7LHxbh3ZKpFF2n58",
-"https://forms.gle/kw7EYHwEVwUHGt6F7",
-"https://forms.gle/UvKAGpDtqxzF1Sgs6",
-"https://docs.google.com/forms/d/e/1FAIpQLSeq_pnDufCBV9ugVFv4fsgA5fAdb2zKSqW0b6y2tvN9az0aiA/viewform?usp=header",
-"https://docs.google.com/forms/d/e/1FAIpQLSe9EbFX6CfmYDIMGHD5eLjutgtodXWK2uvMuzy_q1Nfj-4gkA/viewform?usp=header",
-"https://docs.google.com/forms/d/e/1FAIpQLScK8s0xsgu8zxcaJfPkkSHdxaen08lzryLR3Fg8QTgBacA3bg/viewform?usp=header",
-"https://forms.gle/GzV9WbqqXZaG4M5T9",
-"https://forms.gle/fKHsZhYTT25Jz82d9",
-"https://forms.gle/iU1WZMGzZ2pkGNgN8",
-"https://docs.google.com/forms/d/e/1FAIpQLSc8l3DkbmL4gKKc6cvLBSn2huPgPHHXWKz9Yv4zipZU6f5hyA/viewform?usp=header",
-"https://docs.google.com/forms/d/e/1FAIpQLSeriu1nPrw2Av85y8gjPeuxEoXf-6MJYZK5tGY7CH782telqA/viewform?usp=header",
-"https://docs.google.com/forms/d/e/1FAIpQLSeG5XlBtiSN98Ji8JqXcama3a1jKzHz7tpS_3jrfPeB3eziRQ/viewform?usp=header",
+"https://docs.google.com/forms/d/e/1FAIpQLSc6RoEleJvfPPrQSks5ao9rFvrpTT6XjbR3kKJOVJRjc4Z-gQ/viewform?usp=header",
+"https://docs.google.com/forms/d/e/1FAIpQLSc_T3Jr43r3KsZMcR0RKUmdmnLO2yuAv6rR4tozKmoLBswJZg/viewform?usp=publish-editor",
+"https://docs.google.com/forms/d/e/1FAIpQLSchPu8lF4pVqyRL08ImavcTw1aY-yTm4I8c5GJAC6kG5MYG4A/viewform?usp=header",
+"https://docs.google.com/forms/d/e/1FAIpQLSfjdioYWGSBiWrgnPhZGYw0BDFmyp828-dkgH4ra9LsHno68A/viewform?usp=header",
+"https://docs.google.com/forms/d/e/1FAIpQLScTt7WlSNDhwDpJsjWk4VB2HSxHPhuiTNQ90kzZdyPMJYaeyw/viewform?usp=header",
+"https://docs.google.com/forms/d/e/1FAIpQLScFbuo0NkA1J67uVrBM1u4tcpQn3ObQk_L5q11o6zRe2_VilA/viewform?usp=header",
+"https://docs.google.com/forms/d/e/1FAIpQLSd79WvNTYAN2NYe6wFYNNGok85yVmosuPgFA2R-ge3KSuFEVA/viewform?usp=header"
   // ← add more links here anytime
 ];
 
 // Change this value to reset everyone's lock (e.g. for a new exam batch)
-const LOCK_KEY = 'echo_exam_lock_v1';
+const LOCK_KEY = 'gtnx_exam_lock_v1';
 // ============================================================
 
 
@@ -427,10 +411,10 @@ const TAU = Math.PI * 2;
 const SEG = SETS.length;
 const SEG_ANG = TAU / SEG;
 
-const COLORS   = ['#0B7A3E','#F3FFF0','#128254','#E3FFE0','#D6FFC2','#F0FFE8','#0A6B34','#F7FFF3','#0FA968','#C9FFC0','#0C9E52','#DFFFE0','#146B45','#EFFFE8','#12B37A'];
-const TEXT_DARK  = '#0A1F12';
-const TEXT_LIGHT = '#F3FFF0';
-const TEXT_CLR   = [TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_DARK,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT];
+const COLORS   = ['#0B4C91','#F0F6FF','#7A1FA8','#E8E6FF','#FFD23D','#0EA5E9','#0A1E4D','#FDF0FF','#D6249B','#C9E9FF','#1B0F5C','#FFF2C2','#118AB2','#FFE1F5','#4B0F91'];
+const TEXT_DARK  = '#070B1E';
+const TEXT_LIGHT = '#EAF4FF';
+const TEXT_CLR   = [TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_DARK,TEXT_LIGHT,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT];
 
 let rot = Math.random() * TAU;
 let spinning = false;
@@ -471,8 +455,8 @@ function drawWheel(r) {
   // Outer glow disc
   ctx.save();
   ctx.beginPath(); ctx.arc(cx,cy,rad+14,0,TAU);
-  ctx.fillStyle='rgba(140,210,17,0.10)';
-  ctx.shadowColor='rgba(140,210,17,0.6)'; ctx.shadowBlur=28;
+  ctx.fillStyle='rgba(255,46,154,0.10)';
+  ctx.shadowColor='rgba(255,46,154,0.6)'; ctx.shadowBlur=28;
   ctx.fill(); ctx.restore();
 
   // Segments
@@ -491,7 +475,7 @@ function drawWheel(r) {
 
     // Divider lines
     ctx.save();
-    ctx.strokeStyle='rgba(80,30,80,0.55)'; ctx.lineWidth=2.5;
+    ctx.strokeStyle='rgba(10,8,40,0.55)'; ctx.lineWidth=2.5;
     ctx.shadowColor='rgba(0,0,0,0.4)'; ctx.shadowBlur=3;
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,rad,s,e); ctx.closePath();
     ctx.stroke(); ctx.restore();
@@ -525,7 +509,7 @@ function drawWheel(r) {
     ctx.moveTo(innerR, 0); ctx.lineTo(outerR, 0);
     ctx.strokeStyle = isMajor ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.45)';
     ctx.lineWidth = isMajor ? 3 : 1.5;
-    ctx.shadowColor = 'rgba(183,242,76,0.8)'; ctx.shadowBlur = isMajor ? 8 : 3;
+    ctx.shadowColor = 'rgba(255,210,61,0.8)'; ctx.shadowBlur = isMajor ? 8 : 3;
     ctx.stroke(); ctx.restore();
   }
 
@@ -538,25 +522,25 @@ function drawWheel(r) {
     const dy = cy + Math.sin(angle) * dr;
     ctx.save();
     ctx.beginPath(); ctx.arc(dx, dy, 3, 0, TAU);
-    ctx.fillStyle = i % 3 === 0 ? 'rgba(255,180,60,0.85)' : 'rgba(255,255,255,0.45)';
-    ctx.shadowColor='rgba(255,180,60,0.6)'; ctx.shadowBlur=6;
+    ctx.fillStyle = i % 3 === 0 ? 'rgba(255,196,46,0.85)' : 'rgba(255,255,255,0.45)';
+    ctx.shadowColor='rgba(255,196,46,0.6)'; ctx.shadowBlur=6;
     ctx.fill(); ctx.restore();
   }
 
   // Center hub
   ctx.save();
   ctx.beginPath(); ctx.arc(cx,cy,44,0,TAU);
-  ctx.fillStyle='#04100A';
-  ctx.shadowColor='rgba(140,210,17,0.9)'; ctx.shadowBlur=20;
+  ctx.fillStyle='#03050F';
+  ctx.shadowColor='rgba(255,46,154,0.9)'; ctx.shadowBlur=20;
   ctx.fill();
   ctx.beginPath(); ctx.arc(cx,cy,32,0,TAU);
   const hg = ctx.createRadialGradient(cx,cy,0,cx,cy,32);
-  hg.addColorStop(0,'#6ED23A'); hg.addColorStop(1,'#8CD211');
+  hg.addColorStop(0,'#29D6FF'); hg.addColorStop(1,'#FF2E9A');
   ctx.fillStyle=hg; ctx.fill();
-  ctx.fillStyle='#F3FFF0';
+  ctx.fillStyle='#EAF4FF';
   ctx.font='bold 13px "Nunito"'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=5;
-  ctx.fillText('RFR',cx,cy-7); ctx.fillText('70',cx,cy+8);
+  ctx.fillText('GT',cx,cy-7); ctx.fillText('NX',cx,cy+8);
   ctx.restore();
 }
 
@@ -571,7 +555,7 @@ function rotForIdx(idx) {
 
 // ── CONFETTI ──
 const CONFETTI_SHAPES = ['★','●','■','▲','♦'];
-const CONFETTI_COLORS = ['#8CD211','#FFD700','#7CFFD1','#6ED23A','#F3FFF0','#2FE8A8','#B7F24C'];
+const CONFETTI_COLORS = ['#FF2E9A','#FFD700','#9CF0FF','#29D6FF','#EAF4FF','#00A8FF','#FFD23D'];
 function launchConfetti() {
   const container = document.getElementById('confettiContainer');
   container.innerHTML = '';
