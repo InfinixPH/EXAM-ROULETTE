@@ -4,17 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>XENERGY | Exam Roulette</title>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 :root {
-  --accent: #6FBE44;
-  --accent-dark: #4C8A2E;
-  --accent-light: #E7F5DC;
-  --ink: #14150F;
-  --ink-soft: #4A4A46;
+  --accent: #9B6BF2;
+  --accent-dark: #6D3FD6;
+  --accent-light: #F1E9FF;
+  --pink: #F472B6;
+  --blue: #5B8DEF;
+  --ink: #1B1530;
+  --ink-soft: #4A4560;
   --white: #FFFFFF;
-  --line: rgba(20,21,15,0.12);
+  --line: rgba(27,21,48,0.12);
 }
 body {
   min-height: 100vh;
@@ -31,13 +33,13 @@ body {
 /* ── BACKGROUND ── */
 .bg-comic {
   position: fixed; inset: 0;
-  background-image: url('BACKGROUND.png'), linear-gradient(180deg, #F4F4F4 0%, #FFFFFF 100%);
+  background-image: url('BACKGROUND.png'), linear-gradient(180deg, #F6F0FF 0%, #FFFFFF 100%);
   background-size: cover, cover; background-position: center, center;
   z-index: 0;
 }
 .bg-overlay {
   position: fixed; inset: 0;
-  background: radial-gradient(circle at 50% 45%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.55) 65%, rgba(255,255,255,0.75) 100%);
+  background: radial-gradient(circle at 50% 45%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.45) 65%, rgba(255,255,255,0.70) 100%);
   z-index: 1;
 }
 
@@ -58,11 +60,11 @@ body {
 }
 .subtitle-tag {
   display: inline-block;
-  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
-  color: var(--white); font-family: 'Bebas Neue', sans-serif;
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--blue));
+  color: var(--white); font-family: 'Outfit', sans-serif; font-weight: 700;
   font-size: 0.7rem; letter-spacing: 3px; padding: 3px 14px;
   border-radius: 999px; text-transform: uppercase;
-  box-shadow: 0 4px 14px rgba(76,138,46,0.35);
+  box-shadow: 0 4px 14px rgba(109,63,214,0.35);
 }
 
 /* ── COMIC CARD ── */
@@ -72,14 +74,14 @@ body {
   border-radius: 26px;
   border: 1px solid var(--line);
   box-shadow:
-    0 20px 50px rgba(20,21,15,0.10),
-    0 2px 10px rgba(20,21,15,0.06);
+    0 20px 50px rgba(109,63,214,0.14),
+    0 2px 10px rgba(27,21,48,0.06);
   padding: 18px; margin-bottom: 10px;
   position: relative; overflow: hidden;
 }
 .comic-card::before {
   content: ''; position: absolute; top:0; left:0; right:0; height:4px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-dark), var(--accent));
+  background: linear-gradient(90deg, var(--pink), var(--accent), var(--blue));
 }
 
 /* ── WHEEL ── */
@@ -90,9 +92,9 @@ body {
 .wheel-ring {
   position: relative; width: clamp(220px, 54vw, 340px); height: clamp(220px, 54vw, 340px); border-radius: 50%;
   box-shadow:
-    0 0 0 5px rgba(111,190,68,0.85),
-    0 0 0 9px rgba(20,21,15,0.06),
-    0 24px 50px rgba(20,21,15,0.20);
+    0 0 0 5px rgba(155,107,242,0.85),
+    0 0 0 9px rgba(244,114,182,0.18),
+    0 24px 50px rgba(109,63,214,0.28);
 }
 canvas {
   position: absolute; top:0; left:0;
@@ -126,24 +128,24 @@ canvas {
   margin: 0 auto 8px;
   padding: 5px 14px;
   width: fit-content; max-width: 100%;
-  border: 1.5px dashed rgba(76,138,46,0.5);
+  border: 1.5px dashed rgba(109,63,214,0.5);
   border-radius: 999px;
   background: var(--accent-light);
 }
-.spin-note.used { color: #B8860B; border-color: rgba(184,134,11,0.5); background: #FFF6DD; }
+.spin-note.used { color: #C2307F; border-color: rgba(194,48,127,0.5); background: #FFE9F4; }
 
 /* ── SPIN BUTTON ── */
 .spin-btn {
   display: block; width: min(380px,90%);
   margin: 0 auto 6px; padding: 11px 20px;
-  font-family: 'Bangers', Impact, sans-serif;
-  font-size: 1.15rem; letter-spacing: 3px; text-transform: uppercase;
+  font-family: 'Outfit', sans-serif; font-weight: 800;
+  font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase;
   cursor: pointer; border-radius: 16px;
   border: none;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
   color: var(--white); text-shadow: 0 1px 2px rgba(0,0,0,0.2);
   box-shadow:
-    0 10px 26px rgba(76,138,46,0.40),
+    0 10px 26px rgba(109,63,214,0.40),
     inset 0 1px 0 rgba(255,255,255,0.35);
   transition: all 0.18s ease; position: relative; overflow: hidden;
 }
@@ -154,38 +156,38 @@ canvas {
   transform:skewX(-20deg); transition:0.5s;
 }
 .spin-btn:hover::after { left:130%; }
-.spin-btn:hover { transform:translateY(-2px); box-shadow:0 14px 32px rgba(76,138,46,0.5); }
-.spin-btn:active { transform:translateY(1px); box-shadow:0 6px 16px rgba(76,138,46,0.4); }
+.spin-btn:hover { transform:translateY(-2px); box-shadow:0 14px 32px rgba(109,63,214,0.5); }
+.spin-btn:active { transform:translateY(1px); box-shadow:0 6px 16px rgba(109,63,214,0.4); }
 .spin-btn:disabled { opacity:0.45; cursor:not-allowed; transform:none; }
 .spin-btn:disabled:hover::after { left:-80%; }
 
 /* ── RESULT CARD ── */
 .result-card {
-  background: linear-gradient(145deg,rgba(111,190,68,0.08),rgba(20,21,15,0.04));
-  border: 1.5px solid rgba(76,138,46,0.30); border-radius: 16px;
+  background: linear-gradient(145deg,rgba(155,107,242,0.10),rgba(244,114,182,0.06));
+  border: 1.5px solid rgba(109,63,214,0.30); border-radius: 16px;
   padding: 7px; text-align: center;
-  box-shadow: inset 0 0 20px rgba(111,190,68,0.05);
+  box-shadow: inset 0 0 20px rgba(155,107,242,0.06);
   transition: transform 0.2s ease; position: relative; overflow: visible;
 }
 .result-label {
-  font-family: 'Bebas Neue', sans-serif; font-size: 0.58rem;
+  font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.58rem;
   letter-spacing: 3px; color: var(--accent-dark); margin-bottom: 2px; text-transform: uppercase;
 }
 .result-text {
-  font-family: 'Bangers', Impact, sans-serif; font-size: 1.5rem; letter-spacing: 3px;
+  font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: 2px;
   color: var(--ink);
   margin: 1px 0;
 }
 .open-btn {
   display: inline-flex; align-items: center; gap: 8px;
   background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-  color: var(--white); font-family: 'Bebas Neue', sans-serif;
+  color: var(--white); font-family: 'Outfit', sans-serif; font-weight: 700;
   font-size: 0.85rem; letter-spacing: 2px; padding: 6px 18px;
   border-radius: 12px; text-decoration: none; margin-top: 4px;
-  box-shadow: 0 8px 20px rgba(76,138,46,0.35);
+  box-shadow: 0 8px 20px rgba(109,63,214,0.35);
   transition: 0.2s; border: none;
 }
-.open-btn:hover { transform:translateY(-2px); box-shadow:0 12px 26px rgba(76,138,46,0.45); }
+.open-btn:hover { transform:translateY(-2px); box-shadow:0 12px 26px rgba(109,63,214,0.45); }
 
 /* ── POW BUBBLE ── */
 .pow-bubble {
@@ -193,14 +195,14 @@ canvas {
   position: absolute;
   top: -60px; left: 50%; transform: translateX(-50%) scale(0) rotate(-8deg);
   z-index: 100; pointer-events: none;
-  font-family: 'Bangers', Impact, sans-serif;
-  font-size: 2.4rem; letter-spacing: 3px;
+  font-family: 'Outfit', sans-serif; font-weight: 800;
+  font-size: 2.2rem; letter-spacing: 3px;
   color: var(--ink);
   background: radial-gradient(ellipse at 50% 55%, #FFFFFF 55%, var(--accent-light) 100%);
   padding: 12px 28px 14px;
   border-radius: 50%;
   border: 4px solid var(--accent);
-  box-shadow: 0 10px 30px rgba(20,21,15,0.25);
+  box-shadow: 0 10px 30px rgba(27,21,48,0.25);
   white-space: nowrap;
 }
 .pow-bubble.show {
@@ -247,8 +249,8 @@ canvas {
 .meta-row {
   display: flex; justify-content: space-between; align-items: center;
   padding: 4px 4px 2px; font-size: 0.58rem;
-  color: rgba(20,21,15,0.45); letter-spacing: 1px; text-transform: uppercase;
-  font-family: 'Bebas Neue', sans-serif;
+  color: rgba(27,21,48,0.45); letter-spacing: 1px; text-transform: uppercase;
+  font-family: 'Outfit', sans-serif; font-weight: 600;
 }
 
 /* ── MUTE / SOUND TOGGLE ── */
@@ -257,12 +259,18 @@ canvas {
   width: 46px; height: 46px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   background: rgba(255,255,255,0.92);
-  border: 1.5px solid rgba(76,138,46,0.35);
-  box-shadow: 0 8px 24px rgba(20,21,15,0.18);
+  border: 1.5px solid rgba(109,63,214,0.35);
+  box-shadow: 0 8px 24px rgba(27,21,48,0.18);
   cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.mute-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(20,21,15,0.24); }
+.mute-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(27,21,48,0.24); }
 .mute-btn svg { width: 22px; height: 22px; }
+
+/* hidden YouTube player (audio only) */
+.yt-hidden {
+  position: fixed; left: -9999px; top: 0;
+  width: 200px; height: 200px; pointer-events: none;
+}
 
 @media (max-width:500px) {
   .title-comic { font-size:1.35rem; }
@@ -278,16 +286,16 @@ canvas {
 <div class="bg-overlay"></div>
 <div class="confetti-container" id="confettiContainer"></div>
 
-<audio id="bgAudio" src="SONG.mp3" loop preload="auto"></audio>
+<div class="yt-hidden"><div id="ytPlayer"></div></div>
 <button class="mute-btn" id="muteBtn" aria-label="Toggle sound" title="Mute / unmute music">
   <svg id="iconSound" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 9v6h4l5 5V4L8 9H4z" fill="#14150F"/>
-    <path d="M16.5 8.5a5 5 0 0 1 0 7" stroke="#6FBE44" stroke-width="1.8" stroke-linecap="round"/>
-    <path d="M18.8 6.2a8.5 8.5 0 0 1 0 11.6" stroke="#6FBE44" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M4 9v6h4l5 5V4L8 9H4z" fill="#1B1530"/>
+    <path d="M16.5 8.5a5 5 0 0 1 0 7" stroke="#9B6BF2" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M18.8 6.2a8.5 8.5 0 0 1 0 11.6" stroke="#9B6BF2" stroke-width="1.8" stroke-linecap="round"/>
   </svg>
   <svg id="iconMuted" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none">
-    <path d="M4 9v6h4l5 5V4L8 9H4z" fill="#14150F"/>
-    <path d="M16 9l5 5M21 9l-5 5" stroke="#B8860B" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M4 9v6h4l5 5V4L8 9H4z" fill="#1B1530"/>
+    <path d="M16 9l5 5M21 9l-5 5" stroke="#F472B6" stroke-width="1.8" stroke-linecap="round"/>
   </svg>
 </button>
 
@@ -333,17 +341,20 @@ canvas {
 // Set numbers follow the order (Set 1 = first link, etc.)
 // ============================================================
 const LINKS = [
-https://forms.gle/AVv2jGhXbsSSieZRA,
-https://forms.gle/jc7iywigGFYi7S188,
-https://forms.gle/nzwYzoaA9QRh9JfH9,
-https://forms.gle/fwSvxWEkCV1rEzDi6,
-https://docs.google.com/forms/d/e/1FAIpQLScvxMMwqhJOURrE9BA4Mpu7Ou3avGQzsQ9wd_Cg089G00GOtg/viewform?usp=header,
-https://docs.google.com/forms/d/e/1FAIpQLSeZHw7Y-KpMwAPSvu9wDTSMw2owsmOBlfFbd-HK-V5Z4fsQXQ/viewform?usp=publish-editor,
+  'https://forms.gle/AVv2jGhXbsSSieZRA',
+  'https://forms.gle/jc7iywigGFYi7S188',
+  'https://forms.gle/nzwYzoaA9QRh9JfH9',
+  'https://forms.gle/fwSvxWEkCV1rEzDi6',
+  'https://docs.google.com/forms/d/e/1FAIpQLScvxMMwqhJOURrE9BA4Mpu7Ou3avGQzsQ9wd_Cg089G00GOtg/viewform?usp=header',
+  'https://docs.google.com/forms/d/e/1FAIpQLSeZHw7Y-KpMwAPSvu9wDTSMw2owsmOBlfFbd-HK-V5Z4fsQXQ/viewform?usp=publish-editor',
   // ← add more links here anytime
 ];
 
 // Change this value to reset everyone's lock (e.g. for a new exam batch)
 const LOCK_KEY = 'gtnx_exam_lock_v1';
+
+// YouTube video used as background music (the ID after ?v= in the URL)
+const YT_VIDEO_ID = 's_OXCS468Sg';
 // ============================================================
 
 
@@ -356,10 +367,11 @@ const TAU = Math.PI * 2;
 const SEG = SETS.length;
 const SEG_ANG = TAU / SEG;
 
-const COLORS   = ['#14150F','#6FBE44','#FFFFFF','#4C8A2E','#F2F2F0','#1E1F18','#8ED973','#FAFAF8','#2E2F26','#DDEFCB'];
-const TEXT_DARK  = '#14150F';
+// Palette pulled from the XPAD 30 key visual: deep indigo, violet, pink, sky blue, lavender, white
+const COLORS   = ['#2A1B5C','#9B6BF2','#FFFFFF','#F472B6','#EFE7FF','#5B8DEF','#C9A8FF','#FDF4FF','#7C3AED','#DCEBFF'];
+const TEXT_DARK  = '#1B1530';
 const TEXT_LIGHT = '#FFFFFF';
-const TEXT_CLR   = [TEXT_LIGHT,TEXT_DARK,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_DARK,TEXT_LIGHT,TEXT_DARK];
+const TEXT_CLR   = [TEXT_LIGHT,TEXT_LIGHT,TEXT_DARK,TEXT_DARK,TEXT_DARK,TEXT_LIGHT,TEXT_DARK,TEXT_DARK,TEXT_LIGHT,TEXT_DARK];
 
 let rot = Math.random() * TAU;
 let spinning = false;
@@ -400,8 +412,8 @@ function drawWheel(r) {
   // Outer glow disc
   ctx.save();
   ctx.beginPath(); ctx.arc(cx,cy,rad+14,0,TAU);
-  ctx.fillStyle='rgba(111,190,68,0.10)';
-  ctx.shadowColor='rgba(111,190,68,0.5)'; ctx.shadowBlur=24;
+  ctx.fillStyle='rgba(155,107,242,0.10)';
+  ctx.shadowColor='rgba(155,107,242,0.5)'; ctx.shadowBlur=24;
   ctx.fill(); ctx.restore();
 
   // Segments
@@ -420,7 +432,7 @@ function drawWheel(r) {
 
     // Divider lines
     ctx.save();
-    ctx.strokeStyle='rgba(20,21,15,0.30)'; ctx.lineWidth=2;
+    ctx.strokeStyle='rgba(27,21,48,0.30)'; ctx.lineWidth=2;
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,rad,s,e); ctx.closePath();
     ctx.stroke(); ctx.restore();
 
@@ -450,7 +462,7 @@ function drawWheel(r) {
     ctx.translate(cx,cy); ctx.rotate(angle);
     ctx.beginPath();
     ctx.moveTo(innerR, 0); ctx.lineTo(outerR, 0);
-    ctx.strokeStyle = isMajor ? 'rgba(20,21,15,0.55)' : 'rgba(20,21,15,0.25)';
+    ctx.strokeStyle = isMajor ? 'rgba(27,21,48,0.55)' : 'rgba(27,21,48,0.25)';
     ctx.lineWidth = isMajor ? 3 : 1.5;
     ctx.stroke(); ctx.restore();
   }
@@ -464,7 +476,7 @@ function drawWheel(r) {
     const dy = cy + Math.sin(angle) * dr;
     ctx.save();
     ctx.beginPath(); ctx.arc(dx, dy, 3, 0, TAU);
-    ctx.fillStyle = i % 3 === 0 ? 'rgba(111,190,68,0.9)' : 'rgba(255,255,255,0.55)';
+    ctx.fillStyle = i % 3 === 0 ? 'rgba(244,114,182,0.95)' : 'rgba(255,255,255,0.55)';
     ctx.fill(); ctx.restore();
   }
 
@@ -472,11 +484,11 @@ function drawWheel(r) {
   ctx.save();
   ctx.beginPath(); ctx.arc(cx,cy,44,0,TAU);
   ctx.fillStyle='#FFFFFF';
-  ctx.shadowColor='rgba(20,21,15,0.25)'; ctx.shadowBlur=16;
+  ctx.shadowColor='rgba(27,21,48,0.25)'; ctx.shadowBlur=16;
   ctx.fill();
   ctx.beginPath(); ctx.arc(cx,cy,32,0,TAU);
   const hg = ctx.createRadialGradient(cx,cy,0,cx,cy,32);
-  hg.addColorStop(0,'#8ED973'); hg.addColorStop(1,'#4C8A2E');
+  hg.addColorStop(0,'#C9A8FF'); hg.addColorStop(1,'#6D3FD6');
   ctx.fillStyle=hg; ctx.fill();
   ctx.fillStyle='#FFFFFF';
   ctx.font='bold 12px "Nunito"'; ctx.textAlign='center'; ctx.textBaseline='middle';
@@ -495,7 +507,7 @@ function rotForIdx(idx) {
 
 // ── CONFETTI ──
 const CONFETTI_SHAPES = ['★','●','■','▲','♦'];
-const CONFETTI_COLORS = ['#6FBE44','#14150F','#FFFFFF','#4C8A2E','#8ED973','#FFD700'];
+const CONFETTI_COLORS = ['#9B6BF2','#F472B6','#5B8DEF','#6D3FD6','#C9A8FF','#FFFFFF'];
 function launchConfetti() {
   const container = document.getElementById('confettiContainer');
   container.innerHTML = '';
@@ -606,50 +618,83 @@ spinBtn.onclick=()=>{
 
 if (!restoreLock()) drawWheel(rot);
 
-// ── BACKGROUND MUSIC (autoplay + mute toggle) ──
-const bgAudio = document.getElementById('bgAudio');
+// ── BACKGROUND MUSIC (YouTube, hidden player + mute toggle) ──
 const muteBtn = document.getElementById('muteBtn');
 const iconSound = document.getElementById('iconSound');
 const iconMuted = document.getElementById('iconMuted');
 
+let ytPlayer = null, ytReady = false, userMuted = false;
+
+function isAudible() {
+  return ytReady && ytPlayer && !ytPlayer.isMuted() && ytPlayer.getPlayerState() === 1;
+}
 function updateSoundIcon() {
-  const isMuted = bgAudio.muted || bgAudio.paused;
-  iconSound.style.display = isMuted ? 'none' : 'block';
-  iconMuted.style.display = isMuted ? 'block' : 'none';
+  const audible = isAudible();
+  iconSound.style.display = audible ? 'block' : 'none';
+  iconMuted.style.display = audible ? 'none' : 'block';
 }
 
-function tryAutoplay() {
-  bgAudio.muted = false;
-  bgAudio.volume = 0.6;
-  const p = bgAudio.play();
-  if (p && p.catch) {
-    p.catch(() => {
-      // Browser blocked autoplay with sound — start muted, then
-      // unmute automatically on the visitor's first interaction.
-      bgAudio.muted = true;
-      bgAudio.play().catch(()=>{});
-      updateSoundIcon();
-      const resumeWithSound = () => {
-        bgAudio.muted = false;
-        bgAudio.play().catch(()=>{});
+// Load the YouTube IFrame API
+(function loadYT() {
+  const tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+})();
+
+// Called automatically by the YouTube API once it has loaded
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player('ytPlayer', {
+    width: '200', height: '200',
+    videoId: YT_VIDEO_ID,
+    playerVars: {
+      autoplay: 1, loop: 1, playlist: YT_VIDEO_ID,
+      controls: 0, playsinline: 1, rel: 0, modestbranding: 1
+    },
+    events: {
+      onReady: () => {
+        ytReady = true;
+        ytPlayer.setVolume(60);
+        // Browsers block autoplay with sound, so start muted and
+        // unmute on the visitor's first interaction.
+        ytPlayer.mute();
+        ytPlayer.playVideo();
         updateSoundIcon();
-        window.removeEventListener('pointerdown', resumeWithSound);
-        window.removeEventListener('keydown', resumeWithSound);
-      };
-      window.addEventListener('pointerdown', resumeWithSound, { once:true });
-      window.addEventListener('keydown', resumeWithSound, { once:true });
-    });
-  }
-  updateSoundIcon();
+      },
+      onStateChange: () => {
+        // keep looping even if the loop flag is ignored
+        if (ytPlayer.getPlayerState() === 0) ytPlayer.playVideo();
+        updateSoundIcon();
+      }
+    }
+  });
 }
+
+function resumeWithSound(e) {
+  if (e && e.target && muteBtn.contains(e.target)) return; // let the button handle itself
+  if (ytReady && !userMuted) {
+    ytPlayer.unMute();
+    ytPlayer.setVolume(60);
+    ytPlayer.playVideo();
+    setTimeout(updateSoundIcon, 300);
+  }
+  window.removeEventListener('pointerdown', resumeWithSound);
+  window.removeEventListener('keydown', resumeWithSound);
+}
+window.addEventListener('pointerdown', resumeWithSound);
+window.addEventListener('keydown', resumeWithSound);
 
 muteBtn.onclick = () => {
-  bgAudio.muted = !bgAudio.muted;
-  if (!bgAudio.muted && bgAudio.paused) bgAudio.play().catch(()=>{});
-  updateSoundIcon();
+  if (!ytReady) return;
+  if (ytPlayer.isMuted() || ytPlayer.getPlayerState() !== 1) {
+    userMuted = false;
+    ytPlayer.unMute();
+    ytPlayer.playVideo();
+  } else {
+    userMuted = true;
+    ytPlayer.mute();
+  }
+  setTimeout(updateSoundIcon, 200);
 };
-
-tryAutoplay();
 </script>
 </body>
 </html>
