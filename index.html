@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOT 70 Pro 5G+ | Exam Roulette</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --accent: #A874F5;
+  --accent-dark: #7A45D8;
+  --accent-light: #F3EAFF;
+  --pink: #E58FD0;
+  --peach: #F2A98B;
+  --teal: #7FE0D3;
+  --orange: #FF6B1A;
+  --ink: #0E0B16;
+  --ink-soft: #4A4560;
+  --white: #FFFFFF;
+  --line: rgba(14,11,22,0.12);
+}
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  font-family: 'Nunito', 'Segoe UI', sans-serif;
+  color: var(--ink);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+/* ── BACKGROUND ── */
+.bg-comic {
+  position: fixed; inset: 0;
+  background-image: url('BACKGROUND.png?v=2'), linear-gradient(180deg, #F3EAFF 0%, #FFFFFF 100%);
+  background-size: cover, cover; background-position: center, center;
+  z-index: 0;
+}
+.bg-overlay {
+  position: fixed; inset: 0;
+  background: radial-gradient(circle at 50% 45%, rgba(255,255,255,0) 0%, rgba(255,255,255,0.12) 65%, rgba(255,255,255,0.30) 100%);
+  z-index: 1;
+}
+@media (orientation: portrait) {
+  .bg-comic {
+    background-image: url('BACKGROUND_MOBILE.png?v=2'), linear-gradient(180deg, #F3EAFF 0%, #FFFFFF 100%);
+  }
+}
+
+/* ── MAIN CONTAINER ── */
+.container {
+  position: relative; z-index: 10;
+  width: 100%; max-width: 620px; margin: 0 auto;
+}
+
+/* ── HEADER ── */
+.header { text-align: center; margin-bottom: 8px; }
+.logo-infinix {
+  /* INFINIX_LOGO.png has transparent padding; crop to the visible wordmark */
+  width: clamp(78px, 20vw, 104px);
+  aspect-ratio: 641 / 135;
+  margin: 4px auto 8px;
+  background: url('INFINIX_LOGO.png?v=2') no-repeat;
+  background-size: 108.9% auto;
+  background-position: 56.14% 46.29%;
+}
+.logo-product {
+  display: block;
+  width: clamp(230px, 58vw, 400px);
+  height: auto;
+  margin: 0 auto 8px;
+  
+}
+.subtitle-tag {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--pink), var(--peach));
+  color: var(--white); font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 0.7rem; letter-spacing: 3px; padding: 3px 14px;
+  border-radius: 999px; text-transform: uppercase;
+  box-shadow: 0 4px 14px rgba(122,69,216,0.35);
+}
+
+/* ── COMIC CARD ── */
+.comic-card {
+  background: rgba(255,255,255,0.74);
+  backdrop-filter: blur(10px);
+  border-radius: 26px;
+  border: 1px solid var(--line);
+  box-shadow:
+    0 20px 50px rgba(122,69,216,0.14),
+    0 2px 10px rgba(14,11,22,0.06);
+  padding: 18px; margin-bottom: 10px;
+  position: relative; overflow: hidden;
+}
+.comic-card::before {
+  content: ''; position: absolute; top:0; left:0; right:0; height:4px;
+  background: linear-gradient(90deg, var(--accent), var(--pink), var(--peach));
+}
+
+/* ── WHEEL ── */
+.wheel-outer {
+  display: flex; justify-content: center; margin: 30px 0 10px;
+  position: relative;
+}
+.wheel-ring {
+  position: relative; width: clamp(170px, min(54vw, calc(100vh - 460px), calc(100dvh - 460px)), 340px); height: clamp(170px, min(54vw, calc(100vh - 460px), calc(100dvh - 460px)), 340px); border-radius: 50%;
+  box-shadow:
+    0 0 0 5px rgba(168,116,245,0.85),
+    0 0 0 9px rgba(242,169,139,0.30),
+    0 24px 50px rgba(122,69,216,0.28);
+}
+canvas {
+  position: absolute; top:0; left:0;
+  width:100% !important; height:100% !important;
+  border-radius: 50%;
+}
+.pointer-wrap {
+  position: absolute; top:-22px; left:50%;
+  transform: translateX(-50%); z-index: 20;
+  display: flex; flex-direction: column; align-items: center;
+}
+.pointer-tri {
+  width:0; height:0;
+  border-left:15px solid transparent;
+  border-right:15px solid transparent;
+  border-top:32px solid var(--accent-dark);
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+}
+.pointer-dot {
+  width:11px; height:11px; background:var(--orange);
+  border-radius:50%; margin-top:-5px;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.9);
+}
+
+/* ── SPIN NOTE ── */
+.spin-note {
+  text-align: center;
+  font-family: 'Nunito', 'Segoe UI', sans-serif;
+  font-weight: 900; font-size: 0.85rem;
+  color: var(--accent-dark);
+  margin: 0 auto 8px;
+  padding: 5px 14px;
+  width: fit-content; max-width: 100%;
+  border: 1.5px dashed rgba(122,69,216,0.5);
+  border-radius: 999px;
+  background: var(--accent-light);
+}
+.spin-note.used { color: #C2501A; border-color: rgba(194,80,26,0.5); background: #FFEDE2; }
+
+/* ── SPIN BUTTON ── */
+.spin-btn {
+  display: block; width: min(380px,90%);
+  margin: 0 auto 6px; padding: 11px 20px;
+  font-family: 'Outfit', sans-serif; font-weight: 800;
+  font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: var(--white); text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  box-shadow:
+    0 10px 26px rgba(122,69,216,0.40),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+  transition: all 0.18s ease; position: relative; overflow: hidden;
+}
+.spin-btn::after {
+  content:''; position:absolute; top:0; left:-80%;
+  width:55%; height:100%;
+  background: linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent);
+  transform:skewX(-20deg); transition:0.5s;
+}
+.spin-btn:hover::after { left:130%; }
+.spin-btn:hover { transform:translateY(-2px); box-shadow:0 14px 32px rgba(122,69,216,0.5); }
+.spin-btn:active { transform:translateY(1px); box-shadow:0 6px 16px rgba(122,69,216,0.4); }
+.spin-btn:disabled { opacity:0.45; cursor:not-allowed; transform:none; }
+.spin-btn:disabled:hover::after { left:-80%; }
+
+/* ── RESULT CARD ── */
+.result-card {
+  background: linear-gradient(145deg,rgba(168,116,245,0.10),rgba(242,169,139,0.10));
+  border: 1.5px solid rgba(122,69,216,0.30); border-radius: 16px;
+  padding: 7px; text-align: center;
+  box-shadow: inset 0 0 20px rgba(168,116,245,0.06);
+  transition: transform 0.2s ease; position: relative; overflow: visible;
+}
+.result-label {
+  font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.58rem;
+  letter-spacing: 3px; color: var(--accent-dark); margin-bottom: 2px; text-transform: uppercase;
+}
+.result-text {
+  font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: 2px;
+  color: var(--ink);
+  margin: 1px 0;
+}
+.open-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: var(--white); font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 0.85rem; letter-spacing: 2px; padding: 6px 18px;
+  border-radius: 12px; text-decoration: none; margin-top: 4px;
+  box-shadow: 0 8px 20px rgba(122,69,216,0.35);
+  transition: 0.2s; border: none;
+}
+.open-btn:hover { transform:translateY(-2px); box-shadow:0 12px 26px rgba(122,69,216,0.45); }
+
+/* ── POW BUBBLE ── */
+.pow-bubble {
+  display: none;
+  position: absolute;
+  top: -60px; left: 50%; transform: translateX(-50%) scale(0) rotate(-8deg);
+  z-index: 100; pointer-events: none;
+  font-family: 'Outfit', sans-serif; font-weight: 800;
+  font-size: 2.2rem; letter-spacing: 3px;
+  color: var(--ink);
+  background: radial-gradient(ellipse at 50% 55%, #FFFFFF 55%, var(--accent-light) 100%);
+  padding: 12px 28px 14px;
+  border-radius: 50%;
+  border: 4px solid var(--accent);
+  box-shadow: 0 10px 30px rgba(14,11,22,0.25);
+  white-space: nowrap;
+}
+.pow-bubble.show {
+  display: block;
+  animation: powPop 1.4s cubic-bezier(0.36,0.07,0.19,0.97) forwards;
+}
+.pow-bubble::before {
+  content: '';
+  position: absolute; inset: -14px;
+  background: inherit;
+  border-radius: 50%;
+  z-index: -1;
+  clip-path: polygon(
+    50% 0%,58% 6%,65% 2%,70% 9%,78% 6%,80% 14%,88% 13%,87% 22%,95% 23%,92% 31%,100% 35%,95% 42%,100% 48%,94% 53%,97% 60%,90% 63%,91% 71%,83% 72%,82% 80%,74% 79%,70% 87%,62% 84%,57% 91%,50% 88%,43% 91%,38% 84%,30% 87%,26% 79%,18% 80%,17% 72%,9% 71%,10% 63%,3% 60%,6% 53%,0% 48%,5% 42%,0% 35%,8% 31%,5% 23%,13% 22%,12% 13%,20% 14%,22% 6%,30% 9%,35% 2%,42% 6%
+  );
+}
+@keyframes powPop {
+  0%   { transform:translateX(-50%) scale(0) rotate(-8deg); opacity:0; }
+  18%  { transform:translateX(-50%) scale(1.25) rotate(4deg); opacity:1; }
+  32%  { transform:translateX(-50%) scale(0.95) rotate(-3deg); opacity:1; }
+  46%  { transform:translateX(-50%) scale(1.08) rotate(2deg); opacity:1; }
+  65%  { transform:translateX(-50%) scale(1.0) rotate(0deg); opacity:1; }
+  85%  { transform:translateX(-50%) scale(1.0) rotate(0deg); opacity:1; }
+  100% { transform:translateX(-50%) scale(0.8) rotate(5deg); opacity:0; }
+}
+
+/* ── CONFETTI ── */
+.confetti-container {
+  position: fixed; inset: 0; pointer-events: none; z-index: 999; overflow: hidden;
+}
+.confetti-piece {
+  position: absolute;
+  width: 12px; height: 12px;
+  opacity: 0;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  0%   { transform: translateY(-20px) rotate(0deg) scale(1); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg) scale(0.5); opacity: 0; }
+}
+
+/* ── META & HISTORY ── */
+.meta-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 4px 4px 2px; font-size: 0.58rem;
+  color: rgba(14,11,22,0.45); letter-spacing: 1px; text-transform: uppercase;
+  font-family: 'Outfit', sans-serif; font-weight: 600;
+}
+
+/* ── MUTE / SOUND TOGGLE ── */
+.mute-btn {
+  position: fixed; right: 18px; bottom: 18px; z-index: 999;
+  width: 46px; height: 46px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.92);
+  border: 1.5px solid rgba(122,69,216,0.35);
+  box-shadow: 0 8px 24px rgba(14,11,22,0.18);
+  cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.mute-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(14,11,22,0.24); }
+.mute-btn svg { width: 22px; height: 22px; }
+
+/* hidden YouTube player (audio only) */
+.yt-hidden {
+  position: fixed; left: -9999px; top: 0;
+  width: 200px; height: 200px; pointer-events: none;
+}
+
+@media (max-width:500px) {
+  .title-comic { font-size:1.35rem; }
+  .spin-btn { font-size:1rem; padding:10px; }
+  .result-text { font-size:1.3rem; }
+  .mute-btn { right: 12px; bottom: 12px; width: 42px; height: 42px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-comic"></div>
+<div class="bg-overlay"></div>
+<div class="confetti-container" id="confettiContainer"></div>
+
+<div class="yt-hidden"><div id="ytPlayer"></div></div>
+<button class="mute-btn" id="muteBtn" aria-label="Toggle sound" title="Mute / unmute music">
+  <svg id="iconSound" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 9v6h4l5 5V4L8 9H4z" fill="#0E0B16"/>
+    <path d="M16.5 8.5a5 5 0 0 1 0 7" stroke="#A874F5" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M18.8 6.2a8.5 8.5 0 0 1 0 11.6" stroke="#A874F5" stroke-width="1.8" stroke-linecap="round"/>
+  </svg>
+  <svg id="iconMuted" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <path d="M4 9v6h4l5 5V4L8 9H4z" fill="#0E0B16"/>
+    <path d="M16 9l5 5M21 9l-5 5" stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round"/>
+  </svg>
+</button>
+
+<div class="container">
+  <div class="comic-card">
+    <div class="header">
+      <div class="logo-infinix" role="img" aria-label="Infinix"></div>
+      <img src="HOT_70_5G_LOGO.png?v=2" class="logo-product" alt="HOT 70 Pro 5G+">
+      <div class="subtitle-tag">🎯 Exam Roulette</div>
+    </div>
+
+    <div class="wheel-outer">
+      <div class="wheel-ring">
+        <div class="pointer-wrap">
+          <div class="pointer-tri"></div>
+          <div class="pointer-dot"></div>
+        </div>
+        <canvas id="wheelCanvas" width="560" height="560"></canvas>
+      </div>
+    </div>
+
+    <div class="spin-note" id="spinNote">You only have 1 spin.</div>
+    <button class="spin-btn" id="spinBtn">🔥 SPIN THE WHEEL!</button>
+
+    <div class="result-card" id="resultCard">
+      <div class="pow-bubble" id="powBubble">POW!</div>
+      <div class="result-label">▼ Selected Set ▼</div>
+      <div class="result-text" id="resultText">—</div>
+      <div id="linkWrap"></div>
+    </div>
+
+    <div class="meta-row">
+      <span>HOT 70 Pro 5G+ · Exam Roulette</span>
+    </div>
+  </div>
+</div>
+
+<script>
+
+// ============================================================
+// 🔗 ONLY EDIT THIS — paste your links here, one per line
+// Add or remove as many as you want — wheel auto-adjusts
+// NOTE: keep the ORDER of this list stable once the exam is live.
+// Set numbers follow the order (Set 1 = first link, etc.)
+// ============================================================
+const LINKS = [
+'https://docs.google.com/forms/d/e/1FAIpQLSc0an4VwcMrLUEi5H6SkRUXGJPbiPRKFgOCAY-wmZYftrqztw/viewform?usp=header',
+'https://docs.google.com/forms/d/e/1FAIpQLSf62ruOL-rRQZBRfgxjxw1OTmkL5CxWmNf8Y6RKo1e4vZwEzQ/viewform?usp=header',
+'https://docs.google.com/forms/d/e/1FAIpQLSdmZ5jYoOs6rv5NOJfrMCOeTKDm79MNiG3H3us4DhtPhMuJJA/viewform?usp=header',
+'https://docs.google.com/forms/d/e/1FAIpQLSePR5o9G4CKKF4Uxw6pfhnF8r1t8-atbv4z2DXE8k7s9WQfuA/viewform?usp=header',
+'https://forms.gle/C7aq6B4nABv2hLAY8',
+'https://forms.gle/4zYiXHoZ6kqTHRfa7'
+  // ← add more links here anytime
+];
+
+// Change this value to reset everyone's lock (e.g. for a new exam batch)
+const LOCK_KEY = 'gtnx_exam_lock_v1';
+
+// YouTube video used as background music (the ID after ?v= in the URL)
+const YT_VIDEO_ID = 's_OXCS468Sg';
+// ============================================================
+
+
+// Fixed order (no shuffle) so "Set N" always means the same link
+const SETS = LINKS.map((url, i) => ({ name: `Set ${i + 1}`, url }));
+
+const canvas = document.getElementById('wheelCanvas');
+const ctx = canvas.getContext('2d');
+const TAU = Math.PI * 2;
+const SEG = SETS.length;
+const SEG_ANG = TAU / SEG;
+
+// Palette pulled from the HOT 70 Pro 5G+ poster: ink, violet, teal, peach, lavender, cream, white
+const COLORS   = ['#1B1230','#A874F5','#FFFFFF','#7FE0D3','#F3EAFF','#F2A98B','#C9A8FF','#FFF6DB','#7A45D8','#BFEFE8'];
+const TEXT_DARK  = '#0E0B16';
+const TEXT_LIGHT = '#FFFFFF';
+const TEXT_CLR   = [TEXT_LIGHT,TEXT_LIGHT,TEXT_DARK,TEXT_DARK,TEXT_DARK,TEXT_DARK,TEXT_DARK,TEXT_DARK,TEXT_LIGHT,TEXT_DARK];
+
+let rot = Math.random() * TAU;
+let spinning = false;
+let audioCtx = null, lastTick = 0;
+
+const spinBtn = document.getElementById('spinBtn');
+
+function initAudio() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTick(vol=0.16, freq=900) {
+  if (!audioCtx) return;
+  const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+  o.type = 'square'; o.frequency.value = freq;
+  g.gain.setValueAtTime(vol, audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime+0.04);
+  o.connect(g); g.connect(audioCtx.destination);
+  o.start(); o.stop(audioCtx.currentTime+0.045);
+}
+function playLand() {
+  if (!audioCtx) return;
+  const now = audioCtx.currentTime;
+  [0,0.1,0.22].forEach((t,i) => {
+    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type='triangle'; o.frequency.value=[660,880,1100][i];
+    g.gain.setValueAtTime(0.22,now+t);
+    g.gain.exponentialRampToValueAtTime(0.001,now+t+0.2);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(now+t); o.stop(now+t+0.22);
+  });
+}
+
+function drawWheel(r) {
+  const sz=canvas.width, cx=sz/2, cy=sz/2, rad=sz/2-18;
+  ctx.clearRect(0,0,sz,sz);
+
+  // Outer glow disc
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx,cy,rad+14,0,TAU);
+  ctx.fillStyle='rgba(168,116,245,0.10)';
+  ctx.shadowColor='rgba(168,116,245,0.5)'; ctx.shadowBlur=24;
+  ctx.fill(); ctx.restore();
+
+  // Segments
+  for(let i=0;i<SEG;i++) {
+    const s=i*SEG_ANG+r, e=s+SEG_ANG;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,rad,s,e); ctx.closePath();
+    ctx.fillStyle=COLORS[i % COLORS.length]; ctx.fill();
+
+    // Sheen
+    const gs=ctx.createRadialGradient(cx,cy,0,cx,cy,rad);
+    gs.addColorStop(0,'rgba(255,255,255,0.22)');
+    gs.addColorStop(0.45,'rgba(255,255,255,0.04)');
+    gs.addColorStop(1,'rgba(0,0,0,0.12)');
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,rad,s,e); ctx.closePath();
+    ctx.fillStyle=gs; ctx.fill();
+
+    // Divider lines
+    ctx.save();
+    ctx.strokeStyle='rgba(14,11,22,0.30)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,rad,s,e); ctx.closePath();
+    ctx.stroke(); ctx.restore();
+
+    // Label
+    ctx.save();
+    ctx.translate(cx,cy); ctx.rotate(s+SEG_ANG/2);
+    const fs = Math.min(18, rad/4.8);
+    ctx.font = `900 ${fs}px 'Nunito','Segoe UI'`;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    const tc = TEXT_CLR[i % TEXT_CLR.length];
+    ctx.strokeStyle = tc === TEXT_LIGHT ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.5)';
+    ctx.lineWidth=3; ctx.lineJoin='round';
+    ctx.strokeText(SETS[i].name, rad*0.62, 0);
+    ctx.fillStyle=tc;
+    ctx.fillText(SETS[i].name, rad*0.62, 0);
+    ctx.restore();
+  }
+
+  // Tick marks around rim
+  const tickCount = SEG * 4;
+  for(let i=0;i<tickCount;i++) {
+    const angle = (i / tickCount) * TAU + r;
+    const isMajor = i % 4 === 0;
+    const outerR = rad + 2;
+    const innerR = rad - (isMajor ? 14 : 7);
+    ctx.save();
+    ctx.translate(cx,cy); ctx.rotate(angle);
+    ctx.beginPath();
+    ctx.moveTo(innerR, 0); ctx.lineTo(outerR, 0);
+    ctx.strokeStyle = isMajor ? 'rgba(14,11,22,0.55)' : 'rgba(14,11,22,0.25)';
+    ctx.lineWidth = isMajor ? 3 : 1.5;
+    ctx.stroke(); ctx.restore();
+  }
+
+  // Dot ring just inside the rim
+  const dotCount = SEG * 3;
+  for(let i=0;i<dotCount;i++) {
+    const angle = (i / dotCount) * TAU + r;
+    const dr = rad - 22;
+    const dx = cx + Math.cos(angle) * dr;
+    const dy = cy + Math.sin(angle) * dr;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(dx, dy, 3, 0, TAU);
+    ctx.fillStyle = i % 3 === 0 ? 'rgba(255,107,26,0.95)' : 'rgba(255,255,255,0.55)';
+    ctx.fill(); ctx.restore();
+  }
+
+  // Center hub
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx,cy,44,0,TAU);
+  ctx.fillStyle='#FFFFFF';
+  ctx.shadowColor='rgba(14,11,22,0.25)'; ctx.shadowBlur=16;
+  ctx.fill();
+  ctx.beginPath(); ctx.arc(cx,cy,32,0,TAU);
+  const hg = ctx.createRadialGradient(cx,cy,0,cx,cy,32);
+  hg.addColorStop(0,'#C9A8FF'); hg.addColorStop(1,'#7A45D8');
+  ctx.fillStyle=hg; ctx.fill();
+  ctx.fillStyle='#FFFFFF';
+  ctx.font='bold 12px "Nunito"'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('HOT 70',cx,cy-6); ctx.fillText('Pro 5G+',cx,cy+8);
+  ctx.restore();
+}
+
+function getIdx(r) {
+  let a=(-Math.PI/2-r)%TAU; if(a<0) a+=TAU;
+  return Math.min(Math.floor(a/SEG_ANG),SEG-1);
+}
+function rotForIdx(idx) {
+  const ptr=-Math.PI/2, ctr=idx*SEG_ANG+SEG_ANG/2;
+  return ((ptr-ctr)%TAU+TAU)%TAU;
+}
+
+// ── CONFETTI ──
+const CONFETTI_SHAPES = ['★','●','■','▲','♦'];
+const CONFETTI_COLORS = ['#A874F5','#E58FD0','#7FE0D3','#F2A98B','#FF6B1A','#FFFFFF'];
+function launchConfetti() {
+  const container = document.getElementById('confettiContainer');
+  container.innerHTML = '';
+  for(let i=0;i<55;i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.textContent = CONFETTI_SHAPES[Math.floor(Math.random()*CONFETTI_SHAPES.length)];
+    el.style.cssText = `
+      left: ${20+Math.random()*60}%;
+      top: ${30+Math.random()*20}%;
+      font-size: ${10+Math.random()*16}px;
+      color: ${CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)]};
+      animation-duration: ${1.2+Math.random()*1.6}s;
+      animation-delay: ${Math.random()*0.4}s;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    `;
+    container.appendChild(el);
+  }
+  setTimeout(()=>container.innerHTML='', 3000);
+}
+
+// ── POW BUBBLE ──
+const WORDS = ['POW!','BAM!','WOW!','YAY!','🔥'];
+function showPow() {
+  const el = document.getElementById('powBubble');
+  el.textContent = WORDS[Math.floor(Math.random()*WORDS.length)];
+  el.classList.remove('show');
+  void el.offsetWidth;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'), 1500);
+}
+
+// ── LOCK (one spin per browser) ──
+function readLock() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(LOCK_KEY));
+    if (!saved || !saved.url) return null;
+    const idx = SETS.findIndex(s => s.url === saved.url);
+    return idx >= 0 ? idx : null;
+  } catch (e) { return null; }
+}
+function saveLock(idx) {
+  try {
+    localStorage.setItem(LOCK_KEY, JSON.stringify({ url: SETS[idx].url, t: Date.now() }));
+  } catch (e) {}
+}
+function lockButton() {
+  spinBtn.disabled = true;
+  spinBtn.textContent = '🔒 ALREADY SPUN';
+  const note = document.getElementById('spinNote');
+  note.textContent = 'You already used your spin. Your result stays the same.';
+  note.classList.add('used');
+}
+function renderResult(set) {
+  document.getElementById('resultText').textContent = set.name;
+  document.getElementById('linkWrap').innerHTML =
+    `<a href="${set.url}" target="_blank" rel="noopener" class="open-btn">OPEN ${set.name} →</a>`;
+}
+function restoreLock() {
+  const idx = readLock();
+  if (idx === null) return false;
+  rot = rotForIdx(idx);
+  drawWheel(rot);
+  renderResult(SETS[idx]);
+  lockButton();
+  return true;
+}
+
+let startRot, targetRot, spinStart, spinDur;
+function animate(now) {
+  const elapsed=now-spinStart, t=Math.min(1,elapsed/spinDur);
+  const ease=1-Math.pow(1-t,3.8);
+  rot=(startRot+(targetRot-startRot)*ease)%TAU;
+  drawWheel(rot);
+  if(audioCtx) {
+    const delay=28+t*165;
+    if(now-lastTick>delay) { playTick(0.19-t*0.08, 1080-t*480); lastTick=now; }
+  }
+  if(t<1) { requestAnimationFrame(animate); return; }
+  rot=targetRot%TAU; drawWheel(rot);
+  const idx=getIdx(rot); showResult(SETS[idx]); playLand();
+  spinning=false;
+  lockButton(); // stays locked after the spin
+}
+
+function showResult(set) {
+  renderResult(set);
+  const card=document.getElementById('resultCard');
+  card.style.transform='scale(1.04)'; setTimeout(()=>card.style.transform='scale(1)',200);
+  launchConfetti();
+  showPow();
+}
+
+spinBtn.onclick=()=>{
+  if(spinning) return;
+  if(readLock() !== null) { lockButton(); return; } // already spun
+
+  initAudio(); spinning=true; lastTick=0;
+  spinBtn.disabled=true;
+
+  const idx=Math.floor(Math.random()*SEG);
+  saveLock(idx); // saved at click time, so refreshing mid-spin can't re-roll
+
+  startRot=rot; targetRot=rotForIdx(idx)+(8+Math.random()*7)*TAU;
+  spinStart=performance.now(); spinDur=3400+Math.random()*900;
+  requestAnimationFrame(animate);
+};
+
+if (!restoreLock()) drawWheel(rot);
+
+// ── BACKGROUND MUSIC (YouTube, hidden player + mute toggle) ──
+const muteBtn = document.getElementById('muteBtn');
+const iconSound = document.getElementById('iconSound');
+const iconMuted = document.getElementById('iconMuted');
+
+let ytPlayer = null, ytReady = false, userMuted = false, gestureSeen = false;
+
+function isAudible() {
+  return ytReady && ytPlayer && !ytPlayer.isMuted() && ytPlayer.getPlayerState() === 1;
+}
+function updateSoundIcon() {
+  const audible = isAudible();
+  iconSound.style.display = audible ? 'block' : 'none';
+  iconMuted.style.display = audible ? 'none' : 'block';
+}
+
+// Load the YouTube IFrame API
+(function loadYT() {
+  const tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+})();
+
+// Called automatically by the YouTube API once it has loaded
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player('ytPlayer', {
+    width: '200', height: '200',
+    videoId: YT_VIDEO_ID,
+    playerVars: {
+      autoplay: 1, loop: 1, playlist: YT_VIDEO_ID,
+      controls: 0, playsinline: 1, rel: 0, modestbranding: 1
+    },
+    events: {
+      onReady: () => {
+        ytReady = true;
+        ytPlayer.setVolume(60);
+        // Browsers block autoplay with sound, so start muted and
+        // unmute on the visitor's first interaction.
+        ytPlayer.mute();
+        ytPlayer.playVideo();
+        if (gestureSeen && !userMuted) ytPlayer.unMute(); // visitor already tapped before the player loaded
+        updateSoundIcon();
+      },
+      onStateChange: () => {
+        // keep looping even if the loop flag is ignored
+        if (ytPlayer.getPlayerState() === 0) ytPlayer.playVideo();
+        updateSoundIcon();
+      }
+    }
+  });
+}
+
+function resumeWithSound(e) {
+  if (e && e.target && muteBtn.contains(e.target)) return; // let the button handle itself
+  gestureSeen = true;
+  if (!ytReady) return; // keep listening until the player is ready
+  if (!userMuted) {
+    ytPlayer.unMute();
+    ytPlayer.setVolume(60);
+    ytPlayer.playVideo();
+    setTimeout(updateSoundIcon, 300);
+  }
+  window.removeEventListener('pointerdown', resumeWithSound);
+  window.removeEventListener('keydown', resumeWithSound);
+}
+window.addEventListener('pointerdown', resumeWithSound);
+window.addEventListener('keydown', resumeWithSound);
+
+muteBtn.onclick = () => {
+  if (!ytReady) return;
+  if (ytPlayer.isMuted() || ytPlayer.getPlayerState() !== 1) {
+    userMuted = false;
+    ytPlayer.unMute();
+    ytPlayer.playVideo();
+  } else {
+    userMuted = true;
+    ytPlayer.mute();
+  }
+  setTimeout(updateSoundIcon, 200);
+};
+
+// ── LOGO FILE-NAME FALLBACK ──
+// GitHub Pages is case-sensitive, so try the likely names/extensions until one loads.
+function pickImage(bases, cb) {
+  const exts = ['png','PNG'];
+  const list = [];
+  bases.forEach(b => exts.forEach(x => list.push(b + '.' + x)));
+  let i = 0;
+  (function next() {
+    if (i >= list.length) return;
+    const im = new Image();
+    im.onload = () => cb(encodeURI(list[i]) + '?v=2');
+    im.onerror = () => { i++; next(); };
+    im.src = encodeURI(list[i]) + '?v=2';
+  })();
+}
+pickImage(['INFINIX_LOGO','INFINIX LOGO','INFINIX_LOGO_1','Infinix_Logo','infinix_logo'], url => {
+  document.querySelector('.logo-infinix').style.backgroundImage = `url("${url}")`;
+});
+pickImage(['HOT_70_5G_LOGO','HOT_70_PRO_5G_LOGO','HOT 70 PRO 5G LOGO','HOT 70 5G LOGO','HOT_70_5G_LOGO_1','HOT_70_PRO_5G_LOGO_1'], url => {
+  document.querySelector('.logo-product').src = url;
+});
+</script>
+</body>
+</html>
