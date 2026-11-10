@@ -107,7 +107,7 @@ body {
   position: relative;
 }
 .wheel-ring {
-  position: relative; width: clamp(170px, min(54vw, calc(100vh - 460px), calc(100dvh - 460px)), 340px); height: clamp(170px, min(54vw, calc(100vh - 460px), calc(100dvh - 460px)), 340px); border-radius: 50%;
+  position: relative; width: var(--wheel, clamp(170px, min(54vw, calc(100vh - 460px), calc(100dvh - 460px)), 340px)); height: var(--wheel, clamp(170px, min(54vw, calc(100vh - 460px), calc(100dvh - 460px)), 340px)); border-radius: 50%;
   box-shadow:
     0 0 0 5px rgba(168,116,245,0.85),
     0 0 0 9px rgba(242,169,139,0.30),
@@ -135,6 +135,8 @@ canvas {
   border-radius:50%; margin-top:-5px;
   box-shadow: 0 0 0 3px rgba(255,255,255,0.9);
 }
+
+#linkWrap { min-height: 31px; }
 
 /* ── SPIN NOTE ── */
 .spin-note {
@@ -294,6 +296,8 @@ canvas {
   .spin-btn { font-size:1rem; padding:10px; }
   .result-text { font-size:1.3rem; }
   .mute-btn { right: 12px; bottom: 12px; width: 42px; height: 42px; }
+  body { padding: 10px 10px; }
+  .comic-card { padding: 14px; }
 }
 </style>
 </head>
@@ -377,6 +381,7 @@ const YT_VIDEO_ID = 's_OXCS468Sg';
 
 
 // Fixed order (no shuffle) so "Set N" always means the same link
+const USED_NOTE_TEXT = 'You already used your spin. Your result stays the same.';
 const SETS = LINKS.map((url, i) => ({ name: `Set ${i + 1}`, url }));
 
 const canvas = document.getElementById('wheelCanvas');
@@ -576,7 +581,7 @@ function lockButton() {
   spinBtn.disabled = true;
   spinBtn.textContent = '🔒 ALREADY SPUN';
   const note = document.getElementById('spinNote');
-  note.textContent = 'You already used your spin. Your result stays the same.';
+  note.textContent = USED_NOTE_TEXT;
   note.classList.add('used');
 }
 function renderResult(set) {
@@ -738,6 +743,36 @@ pickImage(['INFINIX_LOGO','INFINIX LOGO','INFINIX_LOGO_1','Infinix_Logo','infini
 pickImage(['HOT_70_5G_LOGO','HOT_70_PRO_5G_LOGO','HOT 70 PRO 5G LOGO','HOT 70 5G LOGO','HOT_70_5G_LOGO_1','HOT_70_PRO_5G_LOGO_1'], url => {
   document.querySelector('.logo-product').src = url;
 });
+
+// ── FIT WHEEL TO SCREEN ──
+// Makes the wheel as big as possible while the whole page still fits without scrolling.
+function fitWheel() {
+  const root = document.documentElement;
+  const container = document.querySelector('.container');
+  const note = document.getElementById('spinNote');
+  const SAMPLE = 200;                                   // measure at a known wheel size
+  root.style.setProperty('--wheel', SAMPLE + 'px');
+  const keepText = note.textContent;
+  note.textContent = USED_NOTE_TEXT;                    // worst case: the longer note text
+  const bodyPad = parseFloat(getComputedStyle(document.body).paddingTop) +
+                  parseFloat(getComputedStyle(document.body).paddingBottom);
+  const used = container.offsetHeight + bodyPad;        // total page height at SAMPLE size
+  note.textContent = keepText;
+  const free = window.innerHeight - used - 6;           // small safety margin
+  const card = document.querySelector('.comic-card');
+  const cs = getComputedStyle(card);
+  const maxByWidth = card.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - 22; // ring glow
+  const size = Math.max(170, Math.min(SAMPLE + free, maxByWidth, 600));
+  root.style.setProperty('--wheel', Math.floor(size) + 'px');
+}
+fitWheel();
+window.addEventListener('resize', fitWheel);
+window.addEventListener('orientationchange', fitWheel);
+window.addEventListener('load', fitWheel);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWheel);
+// logos change the header height once they load
+document.querySelectorAll('.logo-product').forEach(i => i.addEventListener('load', fitWheel));
+setTimeout(fitWheel, 600);
 </script>
 </body>
 </html>
